@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computación Verde: el costo ambiental de la nube</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0d0f;
+    --bg-raised: #10151a;
+    --line: #1e2a2e;
+    --accent: #34f5c5;
+    --accent-dim: #1f8c72;
+    --text: #e8f0ee;
+    --text-dim: #8fa3a0;
+    --error: #ff6b6b;
+    --font-title: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(52,245,197,0.10), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(52,245,197,0.025) 0px, rgba(52,245,197,0.025) 1px, transparent 1px, transparent 3px);
+    z-index: 0;
+  }
+
+  .wrap{
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4.5rem 1.5rem 5rem;
+  }
+
+  @media (min-width: 640px){
+    .wrap{ padding: 6rem 2rem 6rem; }
+  }
+
+  /* ---------- Hero ---------- */
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin: 0 0 1rem;
+  }
+
+  h1{
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: clamp(1.9rem, 5.5vw, 2.75rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.25rem;
+    color: var(--text);
+  }
+
+  .hero p{
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    max-width: 58ch;
+    margin: 0 0 0.9rem;
+  }
+
+  .hero-stats{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.75rem;
+    margin-top: 2rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .hero-stats div strong{
+    display: block;
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    color: var(--accent);
+  }
+
+  .hero-stats div span{
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+  /* ---------- Sección genérica ---------- */
+
+  section{
+    margin-top: 4rem;
+  }
+
+  h2{
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin: 0 0 1.75rem;
+    color: var(--text);
+  }
+
+  /* ---------- Tarjetas de pasos ---------- */
+
+  .steps{
+    display: grid;
+    gap: 1rem;
+  }
+
+  .step{
+    position: relative;
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.25rem 1.3rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .step:hover{
+    border-color: var(--accent-dim);
+    transform: translateY(-2px);
+  }
+
+  .step-num{
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    padding-top: 0.1rem;
+  }
+
+  .step h3{
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 0 0 0.3rem;
+    color: var(--text);
+  }
+
+  .step p{
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--text-dim);
+  }
+
+  /* ---------- Opinión (texto libre, no formulario) ---------- */
+
+  .prompt-line{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-bottom: 0.6rem;
+  }
+
+  /* ---------- Formulario ---------- */
+
+  form{
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  .field label{
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-bottom: 0.45rem;
+  }
+
+  .field input,
+  .field textarea{
+    width: 100%;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0.8rem 0.9rem;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: border-color 0.15s ease;
+  }
+
+  .field textarea{
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  .field input:focus,
+  .field textarea:focus{
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .field input:invalid:not(:placeholder-shown),
+  .field textarea:invalid:not(:placeholder-shown){
+    border-color: rgba(255,107,107,0.5);
+  }
+
+  .field-msg{
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--error);
+    min-height: 1rem;
+    margin-top: 0.35rem;
+    display: none;
+  }
+
+  .field-msg.show{ display: block; }
+
+  button[type="submit"]{
+    justify-self: start;
+    margin-top: 0.4rem;
+    background: var(--accent);
+    color: #06110d;
+    border: none;
+    border-radius: 8px;
+    padding: 0.85rem 1.8rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: filter 0.15s ease, transform 0.15s ease;
+  }
+
+  button[type="submit"]:hover{
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
+
+  button[type="submit"]:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .result-msg{
+    margin-top: 1.1rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    display: none;
+  }
+
+  .result-msg.show{ display: block; }
+
+  .result-msg.ok{
+    background: rgba(52,245,197,0.08);
+    border: 1px solid var(--accent-dim);
+    color: var(--accent);
+  }
+
+  .result-msg.err{
+    background: rgba(255,107,107,0.08);
+    border: 1px solid rgba(255,107,107,0.4);
+    color: var(--error);
+  }
+
+  footer{
+    margin-top: 4.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- Hero -->
+  <p class="eyebrow">Actividad de reflexión — computación verde</p>
+  <h1>Computación Verde: el costo ambiental de la nube</h1>
+  <div class="hero">
+    <p>Cuando guardas un archivo "en la nube", ese archivo no flota en ningún lado: vive en un disco físico dentro de un centro de datos. Esas instalaciones funcionan sin parar, consumen enormes cantidades de electricidad para procesar información y grandes volúmenes de agua para enfriar los servidores día y noche.</p>
+    <p>Esta página te guía en tres pasos para investigar ese impacto con ayuda de una IA generativa y después escribir tu propia postura al respecto.</p>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <strong>~1%</strong>
+      <span>del consumo eléctrico mundial lo usan los centros de datos</span>
+    </div>
+    <div>
+      <strong>24/7</strong>
+      <span>operación continua para mantener tus archivos disponibles</span>
+    </div>
+    <div>
+      <strong>H₂O</strong>
+      <span>litros de agua usados a diario para enfriar servidores</span>
+    </div>
+  </div>
+
+  <!-- Pasos -->
+  <section>
+    <h2>Antes de opinar, investiga</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div>
+          <h3>Abre una IA generativa</h3>
+          <p>Usa ChatGPT, Gemini, Copilot o Claude — la que ya tengas a la mano.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <div>
+          <h3>Pídele que te explique el tema</h3>
+          <p>Pregúntale por el impacto ambiental de los centros de datos y por 3 principios de "computación verde".</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <div>
+          <h3>Escribe tu propia opinión</h3>
+          <p>Con esa información en mente, redacta lo que tú piensas, sin copiar y pegar la respuesta de la IA.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulario -->
+  <section>
+    <h2>Comparte tu opinión</h2>
+    <p class="prompt-line">// completa el formulario con tus propias palabras</p>
+
+    <form id="opinion-form" novalidate>
+      <div class="field">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana López" autocomplete="name" required minlength="3">
+        <div class="field-msg" id="nombre-msg">El nombre debe tener al menos 3 caracteres.</div>
+      </div>
+
+      <div class="field">
+        <label for="correo">Correo electrónico</label>
+        <input type="email" id="correo" name="correo" placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
+        <div class="field-msg" id="correo-msg">Escribe un correo con formato válido.</div>
+      </div>
+
+      <div class="field">
+        <label for="opinion">Tu opinión</label>
+        <textarea id="opinion" name="opinion" placeholder="¿Qué piensas sobre el impacto ambiental del almacenamiento en la nube?" required minlength="15"></textarea>
+        <div class="field-msg" id="opinion-msg">Escribe al menos 15 caracteres.</div>
+      </div>
+
+      <button type="submit" id="submit-btn">Enviar opinión</button>
+
+      <div class="result-msg" id="result-msg"></div>
+    </form>
+  </section>
+
+  <footer>
+    Actividad educativa · sin recolección de datos con fines comerciales
+  </footer>
+
+</div>
+
+<script>
+  // Reemplaza esta constante con la URL real del webhook antes de publicar.
+  const WEBHOOK_URL = "https://example.com/webhook/computacion-verde";
+
+  const form = document.getElementById('opinion-form');
+  const nombreInput = document.getElementById('nombre');
+  const correoInput = document.getElementById('correo');
+  const opinionInput = document.getElementById('opinion');
+  const submitBtn = document.getElementById('submit-btn');
+  const resultMsg = document.getElementById('result-msg');
+
+  const validators = {
+    nombre: (v) => v.trim().length >= 3,
+    correo: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+    opinion: (v) => v.trim().length >= 15
+  };
+
+  function setFieldError(input, msgEl, isValid, hasContent){
+    const showError = hasContent && !isValid;
+    msgEl.classList.toggle('show', showError);
+    input.style.borderColor = showError ? 'rgba(255,107,107,0.5)' : '';
+  }
+
+  function validateField(input, msgEl, key){
+    const value = input.value;
+    const isValid = validators[key](value);
+    setFieldError(input, msgEl, isValid, value.trim().length > 0);
+    return isValid;
+  }
+
+  function validateAll(){
+    const nombreOk = validators.nombre(nombreInput.value);
+    const correoOk = validators.correo(correoInput.value);
+    const opinionOk = validators.opinion(opinionInput.value);
+    return nombreOk && correoOk && opinionOk;
+  }
+
+  [
+    [nombreInput, document.getElementById('nombre-msg'), 'nombre'],
+    [correoInput, document.getElementById('correo-msg'), 'correo'],
+    [opinionInput, document.getElementById('opinion-msg'), 'opinion']
+  ].forEach(([input, msgEl, key]) => {
+    input.addEventListener('input', () => validateField(input, msgEl, key));
+  });
+
+  function showResult(kind, text){
+    resultMsg.textContent = text;
+    resultMsg.className = 'result-msg show ' + kind;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const nombreOk = validateField(nombreInput, document.getElementById('nombre-msg'), 'nombre');
+    const correoOk = validateField(correoInput, document.getElementById('correo-msg'), 'correo');
+    const opinionOk = validateField(opinionInput, document.getElementById('opinion-msg'), 'opinion');
+
+    if (!nombreOk || !correoOk || !opinionOk){
+      showResult('err', 'Revisa los campos marcados antes de enviar.');
+      return;
+    }
+
+    const payload = {
+      nombre: nombreInput.value.trim(),
+      correo: correoInput.value.trim(),
+      opinion: opinionInput.value.trim(),
+      enviado_en: new Date().toISOString()
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando…';
+
+    try {
+      const response = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) throw new Error('Respuesta no válida del servidor');
+
+      showResult('ok', `Gracias, ${payload.nombre}. Tu opinión fue enviada correctamente.`);
+      form.reset();
+    } catch (err) {
+      showResult('err', 'No se pudo enviar tu opinión. Inténtalo de nuevo en unos minutos.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar opinión';
+    }
+  });
+</script>
+
+</body>
+</html>

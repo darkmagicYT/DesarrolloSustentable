@@ -398,7 +398,7 @@
   const validators = {
     nombre: (v) => v.trim().length >= 3,
     correo: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
-    opinion: (v) => v.trim().length >= 15
+    opinion: (v) => v.trim().length >= 100
   };
 
   function setFieldError(input, msgEl, isValid, hasContent){

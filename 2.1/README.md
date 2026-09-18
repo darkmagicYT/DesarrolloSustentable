@@ -26,7 +26,7 @@ Programar en Arduino el control secuencial de múltiples salidas digitales (10 L
 
 ## Código
 
-[Codigo/Elultimoescrito.ino](enlace-al-repositorio)
+[Elultimoescrito.ino](Codigo/Elultimoescrito.ino)
 
 ## Video del funcionamiento
 
@@ -38,7 +38,7 @@ _(Pendiente: agregar aquí fotografías del circuito armado en la protoboard)_
 
 ## Reporte
 
-[Resultados/Resultados.pdf](enlace-al-reporte)
+[Resultados.pdf](Resultados/Resultados.pdf)
 
 ## Conclusiones
 
@@ -46,7 +46,7 @@ La práctica permitió reforzar el manejo de múltiples salidas digitales de for
 
 ## Resultados
 
-[Resultados/Resultados.pdf](enlace-al-reporte)
+[Resultados.pdf](Resultados/Resultados.pdf)
 
 Documento con la descripción de la práctica, objetivos y procedimientos realizados.
 

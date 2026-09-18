@@ -34,7 +34,9 @@ Programar en Arduino el control secuencial de múltiples salidas digitales (10 L
 
 ## Evidencias de armado
 
-_(Pendiente: agregar aquí fotografías del circuito armado en la protoboard)_
+[](Imagenes/ModoBoom.jpeg)
+[](Imagenes/ModoOla.jpeg)
+[](Imagenes/ModoParImpar.jpeg)
 
 ## Reporte
 

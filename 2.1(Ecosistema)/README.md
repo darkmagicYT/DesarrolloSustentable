@@ -30,9 +30,9 @@ Realizar una automatización que nos permita conocer el papel que ocupa cada ser
 
 ###
 
-[Foto1](Imágenes/Perro.png)
-[Foto2](Imágenes/Agave.png)
-[Foto3](Imágenes/Arbol.png)
+[Foto1](Imagenes/Perro.png)
+[Foto2](Imagenes/Agave.png)
+[Foto3](Imagenes/Arbol.png)
 
 ## Reporte
 

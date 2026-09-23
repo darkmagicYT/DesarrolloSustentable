@@ -28,15 +28,14 @@ Realizar una automatización que nos permita conocer el papel que ocupa cada ser
 
 ## Evidencia
 
-###
-
+### Foto 1
 ![Foto1](Imagenes/Perro.png)
+
+### Foto 2
 ![Foto2](Imagenes/Agave.png)
+
+### Foto 3
 ![Foto3](Imagenes/Arbol.png)
-
-## Reporte
-
-[Resultados.pdf](Resultados/Resultados.pdf)
 
 ## Conclusiones
 
@@ -44,4 +43,4 @@ La práctica nos permitió conocer las funciones de los organismos vivos en el e
 
 ## Resultados
 
-[Resultados.pdf](Resultados/Resultados.pdf)
+[Resultados.pdf](Resultados/Resultado.pdf)

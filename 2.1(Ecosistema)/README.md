@@ -16,7 +16,7 @@ Realizar una automatización que nos permita conocer el papel que ocupa cada ser
 
 ## Diagrama
 
-![Diagrama](Imágenes/Diagrama.png)
+![Diagrama](Imagenes/Diagrama.png)
 
 ## Código
 

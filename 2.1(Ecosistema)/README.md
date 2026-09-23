@@ -37,6 +37,8 @@ Realizar una automatización que nos permita conocer el papel que ocupa cada ser
 ### Foto 3
 ![Foto3](Imagenes/Arbol.png)
 
+### Otras 7 fotos en Imágenes.
+
 ## Conclusiones
 
 La práctica nos permitió conocer las funciones de los organismos vivos en el ecosistema y a su vez nos permitió aprender a realizar una automatización que permita solo contestar a imágenes o solo texto.

@@ -1,5 +1,5 @@
 
-# Ecosistema
+# Ecosistema Automatización
 ## Descripción
 
 En este proyecto nos encargamos en realizar una automatización en la cual cada que mandes una foto la IA de Make te envié un mensaje en el cual nos diga que tipo de planta es, nombre, rol en el ecosistema. Se realizo la automatización en Make, también en telegram se realizo un bot para que mande la imagen y ahi te contesta.
@@ -24,7 +24,7 @@ Realizar una automatización que nos permita conocer el papel que ocupa cada ser
 
 ## Video del funcionamiento
 
-[Ver video en YouTube](enlace-al-video)
+![Ver video en YouTube](Video/enlace.txt)
 
 ## Evidencia
 

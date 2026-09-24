@@ -24,7 +24,7 @@ Realizar una automatización que nos permita conocer el papel que ocupa cada ser
 
 ## Video del funcionamiento
 
-[Ver video en YouTube](https://youtu.be/7iHjenTxjtQ)
+[Ver video en YouTube](https://youtu.be/_zSTPmrvZB4)
 
 ## Evidencia
 

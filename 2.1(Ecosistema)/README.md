@@ -37,7 +37,7 @@ Realizar una automatización que nos permita conocer el papel que ocupa cada ser
 ### Foto 3
 ![Foto3](Imagenes/Arbol.png)
 
-### Otras 7 fotos en Imágenes.
+### Otras fotos en Imágenes.
 
 ## Conclusiones
 

@@ -1,0 +1,57 @@
+# Detector de Temperatura
+
+## Descripcion
+
+Se realizo una automatizacion en make que recibe la temperatura del sensor DHT11, y envia un mensaje al Telegram cuando la temperatura supera un umbral definido.
+
+## Objetivos
+
+Se busca conocer el como funciona un sensor DHT11.
+Conseguir una conexion entre el arduino y make.
+Saber el tiempo que tarda en enfriar un cuarto y viceversa.
+Conseguir que se mande el mensaje a make.
+
+## Material utilizado
+
+1. DHT11
+2. Arduino r4 wifi
+3. cables dupont
+4. LED rojo
+5. Resistencia
+6. Protoboard
+7. laptop (Para subir y conectar el arduino)
+
+## Diagrama
+
+![Diagrama Fisico](Imagenes/Diagrama.png)
+
+## Codigo
+
+[Codigo Arduino](Codigo/DHT11Proyect.ino)
+[Codigo Make](Codigo/Mensaje%20Temperatura.blueprint.json)
+
+## Video Funcionamiento
+
+[Ver el video de explicacion](link aqui)
+
+## Evidencia *(FOTOS)*
+
+### Foto 1
+
+![Foto1](Imagenes/)
+
+### Foto 2
+
+![Foto2](Imagenes/)
+
+### Foto 3
+
+![Foto3](Imagenes/)
+
+## Conclusiones
+
+En conclusion fue un proyecto muy practico para conocer como funciona un sensor DHT11 y a su vez ver el tiempo que tarda en calentarse un cuarto y a su vez cuanto tarda en enfriarse.
+
+## Resultados
+
+[Aqui los resultados](Resultados/Resultado.pdf)

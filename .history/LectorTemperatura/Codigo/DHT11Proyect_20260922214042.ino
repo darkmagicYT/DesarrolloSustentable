@@ -13,7 +13,6 @@ const char* host = "hook.us2.make.com"; // ajusta segun tu zona de Make
 const char* webhookPath = "/t40wbzqiixrba4jvotcds2z8bok9xjmb"; // parte despues del dominio
 
 const int ledPin = 13;
-const int ledParpadeoPin = 12; // LED que parpadea cuando la temperatura vuelve a la normalidad
 const float UMBRAL_TEMP = 27.40; // grados Celsius
 
 bool estadoCaliente = false;
@@ -22,12 +21,6 @@ float ultimaHumedad = 65;
 unsigned long ultimaLectura = 0;
 const unsigned long INTERVALO_LECTURA = 2000;
 
-// --- Control del parpadeo no bloqueante ---
-bool parpadeoActivo = false;
-bool estadoLedParpadeo = false;
-unsigned long ultimoCambioParpadeo = 0;
-const unsigned long INTERVALO_PARPADEO = 500; // ms entre cada cambio de estado del LED
-
 WiFiServer server(80);
 WiFiSSLClient client;
 
@@ -35,9 +28,7 @@ void setup() {
   Serial.begin(9600);
   dht.begin();
   pinMode(ledPin, OUTPUT);
-  pinMode(ledParpadeoPin, OUTPUT);
   digitalWrite(ledPin, LOW);
-  digitalWrite(ledParpadeoPin, LOW);
 
   Serial.print("Conectando a Wi-Fi");
   
@@ -62,8 +53,6 @@ void loop() {
     ultimaLectura = millis();
     leerYEvaluar();
   }
-
-  manejarParpadeo();
 
   WiFiClient webClient = server.available();
   if (webClient) {
@@ -95,27 +84,9 @@ void leerYEvaluar() {
   digitalWrite(ledPin, estaCalienteAhora ? HIGH : LOW);
 
   if (estaCalienteAhora && !estadoCaliente) {
-    // Pasó de normal a caliente: apaga el parpadeo si estaba activo
     enviarAlertaMake(temperatura);
-    parpadeoActivo = false;
-    digitalWrite(ledParpadeoPin, LOW);
-  } else if (!estaCalienteAhora && estadoCaliente) {
-    // Pasó de caliente a normal: activa el parpadeo de aviso
-    parpadeoActivo = true;
   }
-
   estadoCaliente = estaCalienteAhora;
-}
-
-void manejarParpadeo() {
-  if (!parpadeoActivo) return;
-
-  unsigned long ahora = millis();
-  if (ahora - ultimoCambioParpadeo >= INTERVALO_PARPADEO) {
-    ultimoCambioParpadeo = ahora;
-    estadoLedParpadeo = !estadoLedParpadeo;
-    digitalWrite(ledParpadeoPin, estadoLedParpadeo ? HIGH : LOW);
-  }
 }
 
 void enviarPagina(WiFiClient &webClient) {

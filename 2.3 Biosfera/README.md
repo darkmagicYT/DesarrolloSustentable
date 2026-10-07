@@ -1,0 +1,58 @@
+# Detector de humedad en tierra
+
+## Descripción
+
+En este proyecto nos encargamos en realizar un detector de humedad para la tierra es decir que cuánta más agua tuviera la tierra más humedad habría.
+
+## Objetivos de aprendizaje
+
+Aprender a crear un circuito en Arduino y a su vez codificarlo para saber si está lo suficientemente húmedo o no la tierra.
+
+## Material utilizado
+
+- Arduino
+- LED
+- Jumper
+- Detector de humedad en suelo
+- protoboard
+- vaso con tierra seca / tierra humeda
+
+## Diagrama
+
+![Diagrama](Imagenes\Diagrama.jpg)
+
+## Código
+
+[HumedadTierra.ino](Codigo/HumedadTierra.ino)
+
+## Video del funcionamiento
+
+[Ver video en YouTube](https://youtu.be/5N0hUV_gOsU)
+
+## Evidencia
+
+### Foto 1 Tierra Humeda
+
+![Foto1](Imagenes/Foto1TierraHumeda.jpeg)
+
+### Foto 2 Tierra Seca
+
+![Foto2](Imagenes/Foto1TierraSeca.jpeg)
+
+### Foto 3 Monitor Humedad
+
+![Foto3](Imagenes/Monitor1.jpeg)
+
+### Foto 3 Monitor Seca
+
+![Foto3](Imagenes/Monitor2.jpeg)
+
+### Otras fotos en Imágenes
+
+## Conclusiones
+
+La práctica nos permitió conocer sobre cómo la tierra absorbe la humedad y cómo esto también nos sirve en caso de que creáramos un terrario, ya que nos permitiría saber cuánta humedad tiene la tierra y si necesita más agua.
+
+## Resultados
+
+[Resultados.pdf](Resultados/Resultados.pdf)

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IDH de mi estado</title>
+<style>
+  :root {
+    --bosque: #12372a;
+    --musgo: #3f6b4a;
+    --hoja: #8fb573;
+    --niebla: #eaf1e8;
+    --rio: #1f7a8c;
+    --texto: #15241b;
+    --error: #9a3412;
+    --papel: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--niebla);
+    color: var(--texto);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    line-height: 1.55;
+  }
+
+  /* Encabezado con curvas de nivel, como un mapa topográfico */
+  header {
+    background-color: var(--bosque);
+    background-image:
+      repeating-radial-gradient(circle at 88% 12%, transparent 0 22px, rgba(143,181,115,.16) 22px 23px),
+      repeating-radial-gradient(circle at 5% 110%, transparent 0 30px, rgba(31,122,140,.28) 30px 31px);
+    color: #f1f7ee;
+    padding: 2.5rem 1.25rem 5rem;
+  }
+  .contenedor { max-width: 42rem; margin: 0 auto; }
+  h1 {
+    margin: 0 0 .75rem;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -.01em;
+  }
+  header p { margin: 0; max-width: 38rem; color: #d3e3cf; }
+
+  main { margin-top: -3rem; padding: 0 1.25rem 3rem; }
+  .panel {
+    background: var(--papel);
+    border: 1px solid #c9d8c4;
+    border-radius: 10px;
+    padding: 1.25rem;
+    box-shadow: 0 10px 30px -18px rgba(18,55,42,.55);
+  }
+  label { display: block; font-weight: 600; margin-bottom: .4rem; }
+  .fila { display: flex; gap: .75rem; flex-wrap: wrap; }
+  select, button {
+    font: inherit;
+    border-radius: 8px;
+    min-height: 2.9rem;
+  }
+  select {
+    flex: 1 1 14rem;
+    padding: .5rem .75rem;
+    border: 1.5px solid #9db79a;
+    background: #fbfdfa;
+    color: var(--texto);
+  }
+  button {
+    flex: 0 0 auto;
+    padding: .5rem 1.5rem;
+    border: 0;
+    background: var(--musgo);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  button:hover:not(:disabled) { background: var(--bosque); }
+  button:disabled { background: #7d9a84; cursor: wait; }
+  select:focus-visible, button:focus-visible {
+    outline: 3px solid var(--rio);
+    outline-offset: 2px;
+  }
+
+  #resultado {
+    margin-top: 1.25rem;
+    padding: 1rem 1.1rem;
+    background: #f3f8f1;
+    border-left: 5px solid var(--rio);
+    border-radius: 0 8px 8px 0;
+    white-space: pre-line;      /* respeta los saltos de línea */
+    overflow-wrap: anywhere;
+  }
+  #resultado[hidden] { display: none; }
+  #resultado.error { border-left-color: var(--error); background: #fdf1e8; color: var(--error); }
+
+  footer { max-width: 42rem; margin: 0 auto; padding: 0 1.25rem 2rem; font-size: .85rem; color: #4b6355; }
+
+  @media (max-width: 480px) {
+    button { flex: 1 1 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="contenedor">
+    <h1>IDH de mi estado</h1>
+    <p>
+      El Índice de Desarrollo Humano (IDH) resume en un valor de 0 a 1 tres capacidades básicas de las
+      personas: vivir una vida larga y saludable, adquirir conocimientos y tener un nivel de vida digno.
+      Elige una entidad federativa y consulta cómo le va.
+    </p>
+  </div>
+</header>
+
+<main>
+  <div class="contenedor">
+    <div class="panel">
+      <label for="entidad">Entidad federativa</label>
+      <div class="fila">
+        <select id="entidad" name="entidad"></select>
+        <button id="consultar" type="button">Consultar</button>
+      </div>
+      <div id="resultado" role="status" aria-live="polite" hidden></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="contenedor">
+    Fuente de los datos: PNUD, Índice de Desarrollo Humano para las entidades federativas, México 2015 (datos de 2012).
+  </div>
+</footer>
+
+<script>
+  // PEGA AQUÍ la URL de tu webhook de Make (Webhooks > Custom webhook)
+  const WEBHOOK_URL = "https://hook.us2.make.com/4b8ukleb4spaob8hly68sjnou0n648tv";
+
+  // [texto que se muestra, valor que se envía a Make]
+  const ENTIDADES = [
+    ["Aguascalientes"], ["Baja California"], ["Baja California Sur"], ["Campeche"], ["Chiapas"],
+    ["Chihuahua"], ["Ciudad de México (Distrito Federal)", "Distrito Federal"], ["Coahuila"],
+    ["Colima"], ["Durango"], ["Guanajuato"], ["Guerrero"], ["Hidalgo"], ["Jalisco"],
+    ["México (Estado de México)", "México"], ["Michoacán"], ["Morelos"], ["Nayarit"],
+    ["Nuevo León"], ["Oaxaca"], ["Puebla"], ["Querétaro"], ["Quintana Roo"],
+    ["San Luis Potosí"], ["Sinaloa"], ["Sonora"], ["Tabasco"], ["Tamaulipas"], ["Tlaxcala"],
+    ["Veracruz"], ["Yucatán"], ["Zacatecas"]
+  ];
+
+  const selector  = document.getElementById("entidad");
+  const boton     = document.getElementById("consultar");
+  const resultado = document.getElementById("resultado");
+
+  ENTIDADES.forEach(([texto, valor]) => {
+    const op = document.createElement("option");
+    op.textContent = texto;
+    op.value = valor || texto;
+    selector.appendChild(op);
+  });
+  selector.value = "Sinaloa";
+
+  function mostrar(texto, esError) {
+    resultado.textContent = texto;
+    resultado.classList.toggle("error", !!esError);
+    resultado.hidden = false;
+  }
+
+  boton.addEventListener("click", async () => {
+    boton.disabled = true;
+    mostrar("Consultando...", false);
+
+    try {
+      const respuesta = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        body: new URLSearchParams({ entidad: selector.value })
+      });
+      if (!respuesta.ok) throw new Error("HTTP " + respuesta.status);
+      const texto = await respuesta.text();      // texto plano, no JSON
+      mostrar(texto.trim(), false);
+    } catch (e) {
+      mostrar("No se pudo obtener la información, intenta de nuevo.", true);
+    } finally {
+      boton.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

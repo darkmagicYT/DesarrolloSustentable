@@ -35,7 +35,9 @@ Página publicada: [https://darkmagicyt.github.io/DesarrolloSustentable/3.2/Codi
 
 ## Video del funcionamiento
 
-[Ver video en YouTube](PEGA_AQUI_EL_LINK_DEL_VIDEO)
+[Ver video en YouTube](https://youtu.be/xLqakAvWR6c)
+
+[Ver carpeta donde se guarda el link a YouTube](Video/README.md)
 
 ## Evidencia
 

@@ -1,18 +1,25 @@
 
-# Biodiversidad bot
+# IDH de mi estado: Página web y Make
 
 ## Descripción
 
-En este proyecto nos encargamos en realizar una automatización en la cual cada que mandes una foto la IA de Make te envié un mensaje en el cual nos de su nombre (Normal y cientifico), su salud, puntos a vigilar de la planta, si tiene algun riesgo y al final un consejo para que la cuide.
+Se realizó una práctica en la que se construyó una página web llamada "IDH de mi estado" y una automatización en Make. En la página el usuario elige una de las 32 entidades federativas de México y presiona "Consultar"; la página envía la entidad a un webhook de Make, un Make AI Agent busca los datos en un archivo de conocimiento (tabla del IDH del informe del PNUD, datos de 2012) y regresa una respuesta en texto plano con el IDH, sus componentes (salud, educación e ingreso), el lugar nacional y una breve interpretación.
+
+Flujo: Página web → Make (Webhooks → Make AI Agent → Webhook Response) → Página web
 
 ## Objetivos de aprendizaje
 
-Realizar una automatización que nos permita conocer que tan bien cuidada o mal cuidada es una planta junto con posibles peligros que traiga esta misma.
+- Interpretar el Índice de Desarrollo Humano (IDH) y sus tres componentes para las entidades de México.
+- Construir sin programar una página web conectada a Make e IA que consulte datos oficiales.
+- Verificar que la información generada por la IA sea fiel a la fuente (informe del PNUD).
 
 ## Material utilizado
 
-- Celular
-- Make
+- Computadora con navegador
+- Make (plan Pro del curso, Make's AI Provider)
+- IA generativa (Claude) para generar la página
+- GitHub y GitHub Pages
+- Informe del PNUD: Índice de Desarrollo Humano para las entidades federativas, México 2015 (archivo `IDH_entidades.pdf` con solo la tabla de las 32 entidades)
 
 ## Diagrama
 
@@ -20,31 +27,49 @@ Realizar una automatización que nos permita conocer que tan bien cuidada o mal 
 
 ## Código
 
-[Blueprint](Codigo/BioDiversidad%20bot.blueprint.json)
+- [index.html (página web)](Codigo/index.html)
+- [Blueprint del escenario de Make](Codigo/IDH_Estado_Equipo.blueprint.json)
+- [Archivo de conocimiento IDH_entidades.pdf](Codigo/IDH_entidades.pdf)
+
+Página publicada: [https://darkmagicyt.github.io/DesarrolloSustentable/3.2/Codigo/index.html](https://darkmagicyt.github.io/DesarrolloSustentable/3.2/Codigo/index.html)
 
 ## Video del funcionamiento
 
-[Ver video en YouTube](https://youtu.be/5N0hUV_gOsU)
+[Ver video en YouTube](PEGA_AQUI_EL_LINK_DEL_VIDEO)
 
 ## Evidencia
 
-### Foto 1
+### Foto 1 (Escenario en Make)
 
-![Foto1](Imagenes/Planta1.png)
+![Escenario](Imagenes/Diagrama.png)
 
-### Foto 2
+### Foto 2 (Configuración del Make AI Agent)
 
-![Foto2](Imagenes/Planta3.png)
+![AI Agent](Imagenes/AIAgent.png)
 
-### Foto 3 (Cuando no recibe foto)
+### Foto 3 (Página web publicada)
 
-![Foto3](Imagenes/MensajeSinFoto.png)
+![Pagina](Imagenes/Pagina.png)
 
-### Otras fotos en Imágenes
+### Foto 4 (Consulta de Sinaloa)
+
+![Sinaloa](Imagenes/IDHSinaloa.png)
+
+### Foto 5 (Entidad con el IDH más alto)
+
+![IDH mas alto](Imagenes/IDHAlto.png)
+
+### Foto 6 (Entidad con el IDH más bajo)
+
+![IDH mas bajo](Imagenes/IDHBajo.png)
+
+### Foto 7 (Créditos consumidos en el historial del escenario)
+
+![Creditos](Imagenes/Creditos.png)
 
 ## Conclusiones
 
-La práctica nos permitió conocer sobre las plantas que nos rodean y que tanto cuidado necesitan para mantenerse.
+La práctica nos permitió conocer cómo se mide el desarrollo humano en las entidades de México a través del IDH y cómo se puede conectar una página web con una automatización en Make y un agente de IA que consulta únicamente una fuente oficial. También vimos la importancia de comparar lo que responde la IA contra el documento original.
 
 ## Resultados
 

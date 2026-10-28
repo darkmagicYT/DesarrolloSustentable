@@ -1,50 +1,59 @@
-
-# Biodiversidad bot
+# Buzón ciudadano con folio: Telegram, Make y Google Sheets
 
 ## Descripción
 
-En este proyecto nos encargamos en realizar una automatización en la cual cada que mandes una foto la IA de Make te envié un mensaje en el cual nos de su nombre (Normal y cientifico), su salud, puntos a vigilar de la planta, si tiene algun riesgo y al final un consejo para que la cuide.
+Se realizó una práctica en la que se construyó un buzón ciudadano automatizado en Telegram. El ciudadano envía al bot un reporte de un problema ambiental de su colonia (formato `Colonia - Problema`); Make recibe el mensaje, genera un folio único con fecha y hora local, registra el reporte en una hoja de Google Sheets (folio, fecha, usuario, nombre, reporte y estatus) y responde al usuario con su folio para dar seguimiento, como lo haría una ventanilla oficial.
+
+También se investigaron 5 organizaciones que reciben reportes o denuncias ambientales (federal, estatal, municipal y social) y se comparó el buzón con un sistema oficial de denuncia.
+
+Flujo: Telegram (Watch Updates) → Router → [ruta de reportes] Set variable (folio) → Google Sheets (Add a Row) → Telegram (respuesta con folio)
 
 ## Objetivos de aprendizaje
 
-Realizar una automatización que nos permita conocer que tan bien cuidada o mal cuidada es una planta junto con posibles peligros que traiga esta misma.
+- Identificar qué organizaciones de la comunidad atienden los problemas ambientales y cómo se presenta un reporte ante ellas.
+- Construir sin programar un buzón ciudadano automatizado que registre reportes con fecha, usuario y folio.
+- Reflexionar sobre el valor de la participación ciudadana formal y sobre la importancia del folio para dar seguimiento y exigir respuesta.
 
 ## Material utilizado
 
-- Celular
-- Make
-
-## Diagrama
-
-![Diagrama](Imagenes/Diagrama.png)
+- Celular con Telegram
+- Computadora con navegador
+- Make (plan Pro del curso)
+- Telegram Bot creado con BotFather
+- Google Sheets (hoja `Buzon_Ciudadano`, pestaña `Reportes`)
+- GitHub
 
 ## Código
 
-[Blueprint](Codigo/BioDiversidad%20bot.blueprint.json)
+- [Blueprint del escenario de Make](Codigo/BuzonCiudadano.blueprint.json)
 
 ## Video del funcionamiento
 
-[Ver video en YouTube](https://youtu.be/5N0hUV_gOsU)
+[Ver video en YouTube](https://youtu.be/wqKR9Z9HLJ8)
+
+[Ver carpeta donde se guarda el link a YouTube](Video/README.md)
 
 ## Evidencia
 
-### Foto 1
+### Investigación: organizaciones que atienden problemas ambientales en Mazatlán
 
-![Foto1](Imagenes/Planta1.png)
+![Orgs](Imagenes/Orgs.png)
 
-### Foto 2
+### Diagrama
 
-![Foto2](Imagenes/Planta3.png)
+![Diagrama](Imagenes/Diagrama.png)
 
-### Foto 3 (Cuando no recibe foto)
+#### Foto (Hoja de registro con encabezados)
 
-![Foto3](Imagenes/MensajeSinFoto.png)
+![Hoja vacía](Imagenes/HojaEncapezados.png)
 
-### Otras fotos en Imágenes
+### Foto 3 (Chat con el bot: reporte enviado y folio recibido, tambien la respuesta en caso de /start)
+
+![Chat](Imagenes/Chat.png)
 
 ## Conclusiones
 
-La práctica nos permitió conocer sobre las plantas que nos rodean y que tanto cuidado necesitan para mantenerse.
+La práctica nos permitió ver cómo se organiza la atención a los problemas ambientales en la comunidad y por qué el folio es lo que convierte un reporte en un trámite con registro, seguimiento y derecho a respuesta. También construimos, sin programar, un buzón que registra reportes con fecha, usuario y folio, y notamos qué le falta para ser un canal formal: una autoridad que lo reciba, que responda y que lo haga en un plazo definido.
 
 ## Resultados
 

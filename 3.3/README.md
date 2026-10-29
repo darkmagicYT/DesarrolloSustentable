@@ -30,7 +30,7 @@ Flujo: Telegram (Watch Updates) → Telegram (Download a File) → Make AI Agent
 
 ## Video del funcionamiento
 
-[Ver video en YouTube](URL_DEL_VIDEO)
+[Ver video en YouTube](https://youtu.be/nM7_17fvbfM)
 
 [Ver carpeta donde se guarda el link a YouTube](Video/README.md)
 

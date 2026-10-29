@@ -26,7 +26,7 @@ Flujo: Telegram (Watch Updates) → Telegram (Download a File) → Make AI Agent
 
 ## Código
 
-- [Blueprint del escenario de Make](Codigo/Clasificador_Residuos_Equipo#.blueprint.json)
+- [Blueprint del escenario de Make](Codigo/Clasificador_Residuos.blueprint.json)
 
 ## Video del funcionamiento
 

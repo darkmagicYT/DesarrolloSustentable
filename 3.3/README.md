@@ -48,9 +48,9 @@ Flujo: Telegram (Watch Updates) → Telegram (Download a File) → Make AI Agent
 
 ![Creditos](Imagenes/Creditos.png)
 
-### Fotos de los materiales a los que se tomaron foto:
+### Fotos de los materiales a los que se tomaron foto
 
-[Fotos](Imagenes/) 
+[Fotos](Imagenes/)
 
 ## Conclusiones
 

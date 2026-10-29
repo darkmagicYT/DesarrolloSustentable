@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estilos de vida entre generaciones</title>
+<style>
+  :root {
+    --bosque: #1f4d3a;
+    --hoja: #3f8a5a;
+    --musgo: #e4efe6;
+    --tierra: #7a5c3e;
+    --cielo: #f4f9f6;
+    --tinta: #1c2b24;
+    --borde: #b9d3c2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    background: var(--cielo);
+    color: var(--tinta);
+    line-height: 1.55;
+  }
+  header {
+    background: var(--bosque);
+    color: #fff;
+    padding: 2.5rem 1.25rem 2rem;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 .75rem; font-size: clamp(1.8rem, 5vw, 2.8rem); }
+  header p { margin: 0 auto; max-width: 62ch; color: #d6e8dc; }
+  main { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+  .columnas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  @media (min-width: 900px) {
+    .columnas { grid-template-columns: repeat(3, 1fr); }
+  }
+  section.persona {
+    background: #fff;
+    border: 1px solid var(--borde);
+    border-top: 6px solid var(--hoja);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+  section.persona:nth-child(2) { border-top-color: var(--tierra); }
+  section.persona:nth-child(3) { border-top-color: var(--bosque); }
+  section.persona h2 { margin: 0 0 1rem; color: var(--bosque); }
+  label { display: block; font-weight: bold; margin: 1rem 0 .3rem; font-size: .95rem; }
+  input[type="number"], textarea {
+    width: 100%;
+    padding: .55rem .65rem;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    font: inherit;
+    background: var(--cielo);
+  }
+  textarea { min-height: 80px; resize: vertical; }
+  input:focus-visible, textarea:focus-visible, button:focus-visible {
+    outline: 3px solid var(--hoja);
+    outline-offset: 1px;
+  }
+  .acciones { text-align: center; margin-top: 2rem; }
+  button {
+    background: var(--hoja);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: .9rem 2rem;
+    font: bold 1.05rem Georgia, serif;
+    cursor: pointer;
+  }
+  button:hover:not(:disabled) { background: var(--bosque); }
+  button:disabled { background: #8fb69f; cursor: not-allowed; }
+  #aviso { margin-top: 1rem; font-weight: bold; min-height: 1.5rem; }
+  #aviso.error { color: #a32a1f; }
+  #aviso.espera { color: var(--bosque); }
+  #resultado {
+    display: none;
+    margin: 1.5rem auto 0;
+    max-width: 900px;
+    background: var(--musgo);
+    border: 1px solid var(--borde);
+    border-left: 6px solid var(--hoja);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: left;
+    white-space: pre-line;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Estilos de vida entre generaciones</h1>
+  <p>Se entrevistó a tres generaciones sobre sus hábitos de consumo para compararlos: cómo se alimentan, qué hacen con la ropa y la basura, cómo se transportan y cómo cuidan el agua.</p>
+</header>
+
+<main>
+  <div class="columnas" id="columnas"></div>
+
+  <div class="acciones">
+    <button id="btnComparar" type="button">Comparar respuestas</button>
+    <div id="aviso" role="status" aria-live="polite"></div>
+    <div id="resultado"></div>
+  </div>
+</main>
+
+<script>
+  // Pega aquí la URL de tu webhook de Make (Custom webhook)
+  const WEBHOOK_URL = "https://hook.us2.make.com/33ynrb3tbakyf4n36shcxxaf0nfdydqu";
+
+  const PREGUNTAS = [
+    "¿Cómo se conseguía la comida en casa: mercado, tienda, súper o cultivo propio?",
+    "¿Qué se hacía con la ropa o los zapatos viejos o rotos?",
+    "¿Qué aparatos electrónicos tenías y cada cuánto los cambiabas?",
+    "¿Cómo te transportabas a la escuela o al trabajo?",
+    "¿Qué se hacía con la basura? ¿Se separaba o se reutilizaba algo?",
+    "¿Usabas bolsas, botellas o envases desechables?",
+    "¿Cómo se usaba y se cuidaba el agua en casa?",
+    "¿Qué consideras necesario para vivir bien?"
+  ];
+
+  // campo = nombre que recibe Make (no cambiar)
+  const PERSONAS = [
+    { campo: "abuelo", titulo: "Abuelo/a" },
+    { campo: "padre",  titulo: "Padre/Madre" },
+    { campo: "amigo",  titulo: "Amigo/a" }
+  ];
+
+  const contenedor = document.getElementById("columnas");
+  const btn = document.getElementById("btnComparar");
+  const aviso = document.getElementById("aviso");
+  const resultado = document.getElementById("resultado");
+
+  // Construir las tres secciones
+  PERSONAS.forEach(function (p) {
+    const sec = document.createElement("section");
+    sec.className = "persona";
+    let html = "<h2>" + p.titulo + "</h2>";
+    html += '<label for="' + p.campo + '-edad">Edad</label>';
+    html += '<input type="number" min="1" max="120" id="' + p.campo + '-edad">';
+    PREGUNTAS.forEach(function (q, i) {
+      html += '<label for="' + p.campo + "-" + i + '">' + (i + 1) + ". " + q + "</label>";
+      html += '<textarea id="' + p.campo + "-" + i + '"></textarea>';
+    });
+    sec.innerHTML = html;
+    contenedor.appendChild(sec);
+  });
+
+  function mostrarAviso(texto, tipo) {
+    aviso.textContent = texto;
+    aviso.className = tipo || "";
+  }
+
+  function camposCompletos() {
+    return PERSONAS.every(function (p) {
+      if (!document.getElementById(p.campo + "-edad").value.trim()) return false;
+      return PREGUNTAS.every(function (q, i) {
+        return document.getElementById(p.campo + "-" + i).value.trim() !== "";
+      });
+    });
+  }
+
+  function armarTexto(campo) {
+    let t = "Edad: " + document.getElementById(campo + "-edad").value.trim();
+    PREGUNTAS.forEach(function (q, i) {
+      t += "\n" + (i + 1) + ". " + q + ": " + document.getElementById(campo + "-" + i).value.trim();
+    });
+    return t;
+  }
+
+  btn.addEventListener("click", async function () {
+    resultado.style.display = "none";
+
+    if (!camposCompletos()) {
+      mostrarAviso("Faltan campos por llenar. Completa la edad y las 8 respuestas de las tres personas.", "error");
+      return;
+    }
+
+    const cuerpo = new URLSearchParams();
+    PERSONAS.forEach(function (p) { cuerpo.append(p.campo, armarTexto(p.campo)); });
+
+    btn.disabled = true;
+    mostrarAviso("Analizando respuestas, esto puede tardar unos segundos...", "espera");
+
+    try {
+      const resp = await fetch(WEBHOOK_URL, { method: "POST", body: cuerpo });
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      const texto = await resp.text();
+      resultado.textContent = texto;
+      resultado.style.display = "block";
+      mostrarAviso("");
+    } catch (e) {
+      mostrarAviso("No se pudo obtener el análisis, intenta de nuevo.", "error");
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,25 +1,24 @@
-
-# IDH de mi estado: Página web y Make
+# Estilos de vida entre generaciones: Página web y Make
 
 ## Descripción
 
-Se realizó una práctica en la que se construyó una página web llamada "IDH de mi estado" y una automatización en Make. En la página el usuario elige una de las 32 entidades federativas de México y presiona "Consultar"; la página envía la entidad a un webhook de Make, un Make AI Agent busca los datos en un archivo de conocimiento (tabla del IDH del informe del PNUD, datos de 2012) y regresa una respuesta en texto plano con el IDH, sus componentes (salud, educación e ingreso), el lugar nacional y una breve interpretación.
+Se realizó una práctica en la que se construyó una página web llamada "Estilos de vida entre generaciones" y una automatización en Make. Se entrevistó a tres personas (un abuelo o abuela, un padre o madre y un amigo o amiga de la misma edad) con las mismas 8 preguntas sobre sus hábitos de consumo (comida, ropa, electrónicos, transporte, basura, desechables, agua y qué consideran necesario para vivir bien). En la página se capturan la edad y las respuestas de cada persona y se presiona "Comparar respuestas"; la página envía los tres textos a un webhook de Make, un Make AI Agent analiza únicamente lo que dicen las respuestas y regresa una respuesta en texto plano con la comparación por tema, un análisis y tres conclusiones.
 
 Flujo: Página web → Make (Webhooks → Make AI Agent → Webhook Response) → Página web
 
 ## Objetivos de aprendizaje
 
-- Interpretar el Índice de Desarrollo Humano (IDH) y sus tres componentes para las entidades de México.
-- Construir sin programar una página web conectada a Make e IA que consulte datos oficiales.
-- Verificar que la información generada por la IA sea fiel a la fuente (informe del PNUD).
+- Distinguir los estilos de vida y de consumo de tres generaciones del entorno familiar o de la comunidad.
+- Construir sin programar una página web conectada a Make e IA que compare las respuestas de las entrevistas.
+- Formular conclusiones propias sobre la sustentabilidad de esos hábitos, analizando con criterio lo que propone la IA.
 
 ## Material utilizado
 
 - Computadora con navegador
 - Make (plan Pro del curso, Make's AI Provider)
-- IA generativa (Claude) para generar la página
+- IA generativa (versión gratuita) para generar la página
 - GitHub y GitHub Pages
-- Informe del PNUD: Índice de Desarrollo Humano para las entidades federativas, México 2015 (archivo `IDH_entidades.pdf` con solo la tabla de las 32 entidades)
+- Tres personas entrevistadas: un abuelo o abuela, un padre o madre y un amigo o amiga de su edad (solo se registró la edad, sin nombres ni otros datos personales)
 
 ## Diagrama
 
@@ -28,14 +27,13 @@ Flujo: Página web → Make (Webhooks → Make AI Agent → Webhook Response) �
 ## Código
 
 - [index.html (página web)](Codigo/index.html)
-- [Blueprint del escenario de Make](Codigo/IDH_Estado_Equipo.blueprint.json)
-- [Archivo de conocimiento IDH_entidades.pdf](Codigo/IDH_entidades.pdf)
+- [Blueprint del escenario de Make](Codigo/Generaciones.blueprint.json)
 
-Página publicada: [https://darkmagicyt.github.io/DesarrolloSustentable/3.2/Codigo/index.html](https://darkmagicyt.github.io/DesarrolloSustentable/3.2/Codigo/index.html)
+Página publicada: [https://darkmagicyt.github.io/DesarrolloSustentable/3.4/Codigo/index.html](https://darkmagicyt.github.io/DesarrolloSustentable/3.4/Codigo/index.html)
 
 ## Video del funcionamiento
 
-[Ver video en YouTube](https://youtu.be/xLqakAvWR6c)
+[Ver video en YouTube](https://youtu.be/PEGA_AQUI_TU_VIDEO)
 
 [Ver carpeta donde se guarda el link a YouTube](Video/README.md)
 
@@ -45,33 +43,21 @@ Página publicada: [https://darkmagicyt.github.io/DesarrolloSustentable/3.2/Codi
 
 ![Escenario](Imagenes/Diagrama.png)
 
-### Foto 2 (Configuración del Make AI Agent)
-
-![AI Agent](Imagenes/AIAgent.png)
-
-### Foto 3 (Página web publicada)
+### Foto 2 (Página web publicada)
 
 ![Pagina](Imagenes/Pagina.png)
 
-### Foto 4 (Consulta de Sinaloa)
+### Foto 3 (Entrevistas capturadas en la página)
 
-![Sinaloa](Imagenes/IDHSinaloa.png)
+![Entrevistas](Imagenes/Entrevistas.png)
 
-### Foto 5 (Entidad con el IDH más alto)
+### Foto 4 (Análisis generado por la IA)
 
-![IDH mas alto](Imagenes/IDHAlto.png)
-
-### Foto 6 (Entidad con el IDH más bajo)
-
-![IDH mas bajo](Imagenes/IDHBajo.png)
-
-### Foto 7 (Créditos consumidos en el historial del escenario)
-
-![Creditos](Imagenes/Creditos.png)
+![Analisis](Imagenes/Analisis.png)
 
 ## Conclusiones
 
-La práctica nos permitió conocer cómo se mide el desarrollo humano en las entidades de México a través del IDH y cómo se puede conectar una página web con una automatización en Make y un agente de IA que consulta únicamente una fuente oficial. También vimos la importancia de comparar lo que responde la IA contra el documento original.
+La práctica nos permitió conocer cómo han cambiado los estilos de vida y de consumo entre tres generaciones y cómo se puede conectar una página web con una automatización en Make y un agente de IA que compara únicamente lo que dicen las entrevistas. También vimos la importancia de leer el análisis de la IA con criterio propio, marcando con qué conclusiones estamos de acuerdo y con cuáles no.
 
 ## Resultados
 

@@ -37,7 +37,8 @@ Página publicada: [[https://darkmagicyt.github.io/DesarrolloSustentable/3.5/Cod
 
 ## Video del funcionamiento
 
-[PENDIENTE: enlace del video]
+[Carpeta](Video/README.md)
+[[enlace del video](https://youtu.be/0t2_hKdPLUc)]
 
 ## Evidencia
 
@@ -52,6 +53,10 @@ Página publicada: [[https://darkmagicyt.github.io/DesarrolloSustentable/3.5/Cod
 ### Foto 3 (Prueba de los temas desde la página publicada)
 
 ![Temas](Imagenes/Temas.png)
+
+### Foto 4 (Creditos)
+
+![Creditos](Imagenes/Creditos.png)
 
 ## Conclusiones
 

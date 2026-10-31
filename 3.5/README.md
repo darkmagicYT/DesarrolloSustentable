@@ -1,25 +1,28 @@
-
-# IDH de mi estado: Página web y Make
+# Noticias climáticas del día: Página web y Make
 
 ## Descripción
 
-Se realizó una práctica en la que se construyó una página web llamada "IDH de mi estado" y una automatización en Make. En la página el usuario elige una de las 32 entidades federativas de México y presiona "Consultar"; la página envía la entidad a un webhook de Make, un Make AI Agent busca los datos en un archivo de conocimiento (tabla del IDH del informe del PNUD, datos de 2012) y regresa una respuesta en texto plano con el IDH, sus componentes (salud, educación e ingreso), el lugar nacional y una breve interpretación.
+Se realizó una práctica en la que se construyó una página web llamada "Noticias climáticas del día" y una automatización en Make. En la página el usuario elige uno de seis temas ambientales y presiona "Ver noticias"; la página envía el tema a un webhook de Make, que busca las cinco noticias más recientes en Google News mediante un feed RSS, las junta en un solo texto, un Make AI Agent las resume y regresa una respuesta en texto plano con un resumen del día, las noticias con su enlace a la fuente y una acción concreta que un estudiante puede realizar.
 
-Flujo: Página web → Make (Webhooks → Make AI Agent → Webhook Response) → Página web
+Flujo: Página web → Make (Webhooks → RSS → Text aggregator → Make AI Agent → Webhook Response) → Página web
+
+Temas elegidos: cambio climático, huracanes Pacífico mexicano, deforestación México, reciclaje, autos eléctricos México y sequía Sinaloa.
 
 ## Objetivos de aprendizaje
 
-- Interpretar el Índice de Desarrollo Humano (IDH) y sus tres componentes para las entidades de México.
-- Construir sin programar una página web conectada a Make e IA que consulte datos oficiales.
-- Verificar que la información generada por la IA sea fiel a la fuente (informe del PNUD).
+- Construir sin programar una herramienta de difusión ambiental que obtenga noticias recientes mediante RSS, las resuma con IA y las muestre en una página web.
+- Verificar que los resúmenes generados por la IA sean fieles a sus fuentes.
 
 ## Material utilizado
 
 - Computadora con navegador
-- Make (plan Pro del curso, Make's AI Provider)
-- IA generativa (Claude) para generar la página
+- Make (plan Pro del curso, conexión Make's AI Provider)
+- IA generativa para generar la página
 - GitHub y GitHub Pages
-- Informe del PNUD: Índice de Desarrollo Humano para las entidades federativas, México 2015 (archivo `IDH_entidades.pdf` con solo la tabla de las 32 entidades)
+
+## Resultados Act9
+
+![Resultados](Imagenes/Resultados.png)
 
 ## Diagrama
 
@@ -28,16 +31,13 @@ Flujo: Página web → Make (Webhooks → Make AI Agent → Webhook Response) �
 ## Código
 
 - [index.html (página web)](Codigo/index.html)
-- [Blueprint del escenario de Make](Codigo/IDH_Estado_Equipo.blueprint.json)
-- [Archivo de conocimiento IDH_entidades.pdf](Codigo/IDH_entidades.pdf)
+- [Blueprint del escenario de Make](Codigo/Noticias_Climaticas.blueprint.json)
 
-Página publicada: [https://darkmagicyt.github.io/DesarrolloSustentable/3.2/Codigo/index.html](https://darkmagicyt.github.io/DesarrolloSustentable/3.2/Codigo/index.html)
+Página publicada: [[https://darkmagicyt.github.io/DesarrolloSustentable/3.5/Codigo/index.html](https://darkmagicyt.github.io/DesarrolloSustentable/3.5/Codigo/index.html)]
 
 ## Video del funcionamiento
 
-[Ver video en YouTube](https://youtu.be/xLqakAvWR6c)
-
-[Ver carpeta donde se guarda el link a YouTube](Video/README.md)
+[PENDIENTE: enlace del video]
 
 ## Evidencia
 
@@ -45,34 +45,14 @@ Página publicada: [https://darkmagicyt.github.io/DesarrolloSustentable/3.2/Codi
 
 ![Escenario](Imagenes/Diagrama.png)
 
-### Foto 2 (Configuración del Make AI Agent)
-
-![AI Agent](Imagenes/AIAgent.png)
-
-### Foto 3 (Página web publicada)
+### Foto 2 (Página web publicada)
 
 ![Pagina](Imagenes/Pagina.png)
 
-### Foto 4 (Consulta de Sinaloa)
+### Foto 3 (Prueba de los temas desde la página publicada)
 
-![Sinaloa](Imagenes/IDHSinaloa.png)
-
-### Foto 5 (Entidad con el IDH más alto)
-
-![IDH mas alto](Imagenes/IDHAlto.png)
-
-### Foto 6 (Entidad con el IDH más bajo)
-
-![IDH mas bajo](Imagenes/IDHBajo.png)
-
-### Foto 7 (Créditos consumidos en el historial del escenario)
-
-![Creditos](Imagenes/Creditos.png)
+![Temas](Imagenes/Temas.png)
 
 ## Conclusiones
 
-La práctica nos permitió conocer cómo se mide el desarrollo humano en las entidades de México a través del IDH y cómo se puede conectar una página web con una automatización en Make y un agente de IA que consulta únicamente una fuente oficial. También vimos la importancia de comparar lo que responde la IA contra el documento original.
-
-## Resultados
-
-[Resultados.pdf](Resultados/Resultados.pdf)
+La práctica permitió construir una herramienta de difusión ambiental sin programar el procesamiento de la información. A su vez comprobamos que la informacion fuera veridica y concordara con la informacion de google news conociedo de antemano que la IA puede comenter errores de estructuracion por falta de contexto. Se reforzo el conocimiento sobre como conectar webhook a una pagina web, se logro conectar la pagina de google news a make para obtener la informacion buscada.

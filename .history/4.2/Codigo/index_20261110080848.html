@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compras local o global?</title>
+<style>
+  :root { --verde:#2e7d32; --verde-osc:#1b5e20; --crema:#f1f8e9; --tierra:#6d4c41; --texto:#1f2d1f; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Arial, Helvetica, sans-serif; background:var(--crema); color:var(--texto); line-height:1.5; }
+  header { background:var(--verde); color:#fff; padding:24px 16px; text-align:center; }
+  header h1 { margin:0 0 8px; font-size:1.6rem; }
+  header p { margin:0 auto; max-width:600px; }
+  main { max-width:640px; margin:0 auto; padding:16px; }
+  fieldset { background:#fff; border:2px solid #c5e1a5; border-radius:12px; margin:0 0 16px; padding:14px 16px; }
+  legend { font-weight:bold; color:var(--verde-osc); padding:0 6px; }
+  label { display:block; padding:8px 4px; cursor:pointer; }
+  input[type=radio] { margin-right:8px; transform:scale(1.2); accent-color:var(--verde); }
+  .botones { display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
+  button { flex:1 1 200px; padding:14px; font-size:1rem; border:none; border-radius:10px; color:#fff; cursor:pointer; }
+  #btnEnviar { background:var(--verde); }
+  #btnReporte { background:var(--tierra); }
+  button:disabled { opacity:.5; cursor:not-allowed; }
+  #mensaje { margin-top:16px; padding:14px; background:#fff; border:2px dashed var(--verde); border-radius:12px; white-space:pre-line; min-height:48px; }
+  #mensaje:empty { display:none; }
+  .error { border-color:#c62828 !important; color:#c62828; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Compras local o global?</h1>
+  <p>Encuesta anonima sobre habitos de compra para la materia de Desarrollo Sustentable.</p>
+</header>
+<main>
+  <form id="formulario">
+    <fieldset>
+      <legend>Donde compras la mayor parte de tu comida?</legend>
+      <label><input type="radio" name="comida" value="Mercado o tianguis">Mercado o tianguis</label>
+      <label><input type="radio" name="comida" value="Tienda de barrio">Tienda de barrio</label>
+      <label><input type="radio" name="comida" value="Supermercado">Supermercado</label>
+      <label><input type="radio" name="comida" value="En linea">En linea</label>
+    </fieldset>
+    <fieldset>
+      <legend>Donde compras tu ropa?</legend>
+      <label><input type="radio" name="ropa" value="Negocio local">Negocio local</label>
+      <label><input type="radio" name="ropa" value="Tienda departamental">Tienda departamental</label>
+      <label><input type="radio" name="ropa" value="App internacional">App internacional</label>
+      <label><input type="radio" name="ropa" value="Segunda mano">Segunda mano</label>
+    </fieldset>
+    <fieldset>
+      <legend>Con que frecuencia compras en apps internacionales?</legend>
+      <label><input type="radio" name="apps" value="Nunca">Nunca</label>
+      <label><input type="radio" name="apps" value="Una vez al mes">Una vez al mes</label>
+      <label><input type="radio" name="apps" value="Varias veces al mes">Varias veces al mes</label>
+      <label><input type="radio" name="apps" value="Cada semana">Cada semana</label>
+    </fieldset>
+    <fieldset>
+      <legend>Que pesa mas al comprar?</legend>
+      <label><input type="radio" name="criterio" value="Precio">Precio</label>
+      <label><input type="radio" name="criterio" value="Calidad">Calidad</label>
+      <label><input type="radio" name="criterio" value="Cercania">Cercania</label>
+      <label><input type="radio" name="criterio" value="Apoyar lo local">Apoyar lo local</label>
+      <label><input type="radio" name="criterio" value="Marca">Marca</label>
+    </fieldset>
+    <fieldset>
+      <legend>Sabes de donde viene lo que compras?</legend>
+      <label><input type="radio" name="origen" value="Si">Si</label>
+      <label><input type="radio" name="origen" value="A veces">A veces</label>
+      <label><input type="radio" name="origen" value="No">No</label>
+    </fieldset>
+    <fieldset>
+      <legend>Rango de edad</legend>
+      <label><input type="radio" name="edad" value="Menos de 18">Menos de 18</label>
+      <label><input type="radio" name="edad" value="18 a 29">18 a 29</label>
+      <label><input type="radio" name="edad" value="30 a 49">30 a 49</label>
+      <label><input type="radio" name="edad" value="50 o mas">50 o mas</label>
+    </fieldset>
+    <div class="botones">
+      <button type="submit" id="btnEnviar">Enviar respuesta</button>
+      <button type="button" id="btnReporte">Generar reporte</button>
+    </div>
+  </form>
+  <div id="mensaje" aria-live="polite"></div>
+</main>
+
+<script>
+// Pega aqui la URL del webhook de Make (Webhooks > Custom webhook)
+const WEBHOOK_URL = "https://hook.us2.make.com/43poxe6eclma68xfngjnoe1jf6r5gucb";
+
+const CAMPOS = ["comida", "ropa", "apps", "criterio", "origen", "edad"];
+const form = document.getElementById("formulario");
+const btnEnviar = document.getElementById("btnEnviar");
+const btnReporte = document.getElementById("btnReporte");
+const caja = document.getElementById("mensaje");
+
+function bloquear(estado) {
+  btnEnviar.disabled = estado;
+  btnReporte.disabled = estado;
+}
+
+function mostrar(texto, esError) {
+  caja.textContent = texto;
+  caja.classList.toggle("error", !!esError);
+}
+
+async function enviar(cuerpo, limpiar) {
+  bloquear(true);
+  mostrar("Procesando...", false);
+  try {
+    const resp = await fetch(WEBHOOK_URL, { method: "POST", body: cuerpo });
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    const texto = await resp.text();
+    mostrar(texto, false);
+    if (limpiar) form.reset();
+  } catch (e) {
+    mostrar("No se pudo conectar, intenta de nuevo.", true);
+  } finally {
+    bloquear(false);
+  }
+}
+
+form.addEventListener("submit", function (ev) {
+  ev.preventDefault();
+  const datos = new URLSearchParams();
+  datos.append("accion", "respuesta");
+  for (const campo of CAMPOS) {
+    const sel = form.querySelector('input[name="' + campo + '"]:checked');
+    if (!sel) {
+      mostrar("Por favor contesta todas las preguntas.", true);
+      return;
+    }
+    datos.append(campo, sel.value);
+  }
+  enviar(datos, true);
+});
+
+btnReporte.addEventListener("click", function () {
+  const datos = new URLSearchParams();
+  datos.append("accion", "reporte");
+  enviar(datos, false);
+});
+</script>
+</body>
+</html>

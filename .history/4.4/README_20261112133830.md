@@ -1,0 +1,77 @@
+# Bot de Telegram "¿Reparo o compro?": Telegram y Make
+
+## Descripción
+
+Se realizó una práctica en la que se construyó un bot de Telegram llamado "Reparo o Compro" y una automatización en Make. En el bot el usuario escribe qué aparato tiene y qué falla presenta; Telegram envía el mensaje a Make mediante Watch Updates, un filtro revisa que sea un texto y no una foto, un sticker o un comando, un Make AI Agent analiza el caso y el bot responde en texto plano con el aparato, la causa probable, el tipo de obsolescencia (planificada o percibida), si tiene reparación, el costo aproximado de repararlo y de comprar uno nuevo, el impacto de desecharlo, una recomendación (reparar, reemplazar, donar o reciclar) y a dónde acudir en Mazatlán.
+
+Flujo: Telegram (Watch Updates) → Filtro → Make AI Agent → Telegram (Send a Text Message or a Reply)
+
+Datos de la práctica: Desarrollo Sustentable (ACD-0908), Unidad 4 "Escenario económico", tema 4.4 "Obsolescencia planificada y percibida", práctica 4.4-P4.
+
+## Objetivos de aprendizaje
+
+- Distinguir la obsolescencia planificada de la percibida en casos reales y valorar la reparación como alternativa de consumo.
+- Construir sin programar un bot de Telegram que reciba la descripción de una falla y recomiende con IA si conviene reparar o reemplazar el aparato.
+- Verificar que las estimaciones de costo y las recomendaciones de la IA coincidan con la información de un taller de reparación de Mazatlán.
+
+## Material utilizado
+
+- Celular con Telegram
+- Computadora con navegador
+- Telegram BotFather (para crear el bot y obtener el token)
+- Make (plan Pro del curso, conexión Make's AI Provider, sin API key)
+- Al menos 6 aparatos con falla para probar el bot
+- GitHub
+
+## Resultados Act4.4
+
+![Resultados](Imagenes/Resultados.png)
+
+## Diagrama
+
+![Diagrama](Imagenes/Diagrama.png)
+
+## Código
+
+- [Blueprint del escenario de Make](Codigo/Reparo_Compro.blueprint.json)
+- [Instrucciones del Make AI Agent](Codigo/Instrucciones_Agente.txt)
+
+> El token del bot no se sube al repositorio. El blueprint se exporta sin la conexión de Telegram.
+
+## Video del funcionamiento
+
+[Carpeta](Video/README.md)
+[[enlace del video](https://youtu.be/ENLACE_DEL_VIDEO)]
+
+## Evidencia
+
+### Foto 1 (Escenario en Make)
+
+![Escenario](Imagenes/Diagrama.png)
+
+### Foto 2 (Bot creado en Telegram con BotFather)
+
+![Bot](Imagenes/Bot.png)
+
+### Foto 3 (Prueba de los 6 aparatos con falla desde Telegram)
+
+![Pruebas](Imagenes/Pruebas.png)
+
+### Foto 4 (Verificación con un taller de Mazatlán)
+
+![Taller](Imagenes/Taller.png)
+
+| Aparato y falla | Recomendación de la IA | Costo según la IA | Cotización del taller | Tipo de obsolescencia | ¿Coincide? |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+
+Taller o negocio consultado y fecha: _______________
+
+### Foto 5 (Creditos)
+
+![Creditos](Imagenes/Creditos.png)
+
+## Conclusiones
+
+La práctica permitió construir un bot de asesoría para reparar o reemplazar aparatos sin programar el procesamiento de la información. A su vez comprobamos las estimaciones de la IA con la cotización de un taller real de Mazatlán, conociendo de antemano que la IA da costos aproximados y puede equivocarse por falta de contexto, por eso conviene pedir siempre una cotización. Se reforzó el conocimiento sobre cómo conectar un bot de Telegram con Make mediante un webhook, y sobre cómo un filtro evita gastar créditos con mensajes que no son texto. También se distinguió entre la obsolescencia planificada y la percibida, y se valoró la reparación como una alternativa para alargar la vida útil de los aparatos y evitar residuos electrónicos.

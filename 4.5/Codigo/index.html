@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noticias climáticas del día</title>
+<style>
+  :root {
+    --bosque: #1f4d3a;
+    --hoja: #3f8f5b;
+    --mar: #1d6f7a;
+    --bruma: #eef5f0;
+    --tierra: #d9e6dc;
+    --tinta: #17261f;
+    --blanco: #ffffff;
+    --error: #8a2d1f;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--tinta);
+    background: var(--bruma);
+  }
+
+  header {
+    background: var(--bosque);
+    color: var(--blanco);
+    padding: 2.5rem 1.25rem 2rem;
+    border-bottom: 6px solid var(--hoja);
+  }
+
+  .contenedor {
+    width: 100%;
+    max-width: 46rem;
+    margin: 0 auto;
+  }
+
+  h1 {
+    margin: 0 0 0.75rem;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: clamp(1.9rem, 5vw, 2.8rem);
+    line-height: 1.15;
+    font-weight: 700;
+  }
+
+  header p {
+    margin: 0;
+    max-width: 38rem;
+    font-size: 1.05rem;
+    color: #dcebe1;
+  }
+
+  main {
+    padding: 2rem 1.25rem 3rem;
+  }
+
+  .panel {
+    background: var(--blanco);
+    border: 1px solid var(--tierra);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+
+  .controles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: flex-end;
+  }
+
+  .campo {
+    flex: 1 1 14rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  label {
+    font-weight: 600;
+    color: var(--bosque);
+  }
+
+  select {
+    width: 100%;
+    padding: 0.7rem 0.75rem;
+    font: inherit;
+    color: var(--tinta);
+    background: var(--blanco);
+    border: 2px solid var(--hoja);
+    border-radius: 8px;
+  }
+
+  button {
+    flex: 0 0 auto;
+    padding: 0.75rem 1.5rem;
+    font: inherit;
+    font-weight: 600;
+    color: var(--blanco);
+    background: var(--mar);
+    border: 2px solid var(--mar);
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  button:hover:not(:disabled) { background: #155760; border-color: #155760; }
+
+  button:disabled {
+    background: #7a9a9f;
+    border-color: #7a9a9f;
+    cursor: not-allowed;
+  }
+
+  select:focus-visible,
+  button:focus-visible,
+  a:focus-visible {
+    outline: 3px solid #f2b705;
+    outline-offset: 2px;
+  }
+
+  #resultados { margin-top: 2rem; }
+
+  #resultados[hidden] { display: none; }
+
+  .titulo-resultados {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--hoja);
+  }
+
+  h2 {
+    margin: 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 1.5rem;
+    color: var(--bosque);
+  }
+
+  #fecha {
+    font-size: 0.95rem;
+    color: var(--mar);
+    font-weight: 600;
+  }
+
+  #estado {
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+    color: var(--mar);
+  }
+
+  #estado.error { color: var(--error); }
+
+  #estado:empty { display: none; }
+
+  #caja {
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+    background: var(--blanco);
+    border: 1px solid var(--tierra);
+    border-left: 6px solid var(--hoja);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+    max-width: 100%;
+  }
+
+  #caja:empty { display: none; }
+
+  #caja a {
+    color: var(--mar);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 30rem) {
+    header { padding: 1.75rem 1rem 1.5rem; }
+    main { padding: 1.5rem 1rem 2.5rem; }
+    button { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="contenedor">
+    <h1>Noticias climáticas del día</h1>
+    <p>Esta página muestra un resumen de las noticias ambientales más recientes, explicado por inteligencia artificial.</p>
+  </div>
+</header>
+
+<main>
+  <div class="contenedor">
+    <section class="panel" aria-label="Selección de tema">
+      <div class="controles">
+        <div class="campo">
+          <label for="tema">Tema</label>
+          <select id="tema" name="tema">
+            <option value="cambio climático">cambio climático</option>
+            <option value="huracanes Pacífico mexicano">huracanes Pacífico mexicano</option>
+            <option value="deforestación México">deforestación México</option>
+            <option value="reciclaje">reciclaje</option>
+            <option value="autos eléctricos México">autos eléctricos México</option>
+            <option value="sequía Sinaloa">sequía Sinaloa</option>
+          </select>
+        </div>
+        <button type="button" id="boton">Ver noticias</button>
+      </div>
+    </section>
+
+    <section id="resultados" aria-live="polite" hidden>
+      <div class="titulo-resultados">
+        <h2>Resultados</h2>
+        <span id="fecha"></span>
+      </div>
+      <p id="estado"></p>
+      <div id="caja"></div>
+    </section>
+  </div>
+</main>
+
+<script>
+  // Pega aquí la URL del webhook de Make (Actividad 2) entre las comillas.
+  const WEBHOOK_URL = "https://hook.us2.make.com/yedwtlclonyfnzf65pxqijjd21jxtr0b";
+
+  const selectTema = document.getElementById("tema");
+  const boton = document.getElementById("boton");
+  const resultados = document.getElementById("resultados");
+  const fecha = document.getElementById("fecha");
+  const estado = document.getElementById("estado");
+  const caja = document.getElementById("caja");
+
+  // Fecha de hoy en español
+  function fechaDeHoy() {
+    return new Date().toLocaleDateString("es-MX", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }
+
+  // Muestra el texto plano; las líneas que empiezan con http se convierten en enlaces
+  function mostrarTexto(texto) {
+    caja.textContent = "";
+    const lineas = texto.split(/\r?\n/);
+    lineas.forEach(function (linea, i) {
+      const limpia = linea.trim();
+      if (/^https?:\/\//i.test(limpia)) {
+        const enlace = document.createElement("a");
+        enlace.href = limpia;
+        enlace.textContent = limpia;
+        enlace.target = "_blank";
+        enlace.rel = "noopener noreferrer";
+        caja.appendChild(enlace);
+      } else {
+        caja.appendChild(document.createTextNode(linea));
+      }
+      if (i < lineas.length - 1) {
+        caja.appendChild(document.createTextNode("\n"));
+      }
+    });
+  }
+
+  async function verNoticias() {
+    resultados.hidden = false;
+    fecha.textContent = fechaDeHoy();
+    caja.textContent = "";
+    estado.className = "";
+    estado.textContent = "Buscando y resumiendo noticias...";
+    boton.disabled = true;
+
+    try {
+      // Envío como formulario (URLSearchParams) con un solo campo: "tema"
+      const respuesta = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        body: new URLSearchParams({ tema: selectTema.value })
+      });
+
+      if (!respuesta.ok) {
+        throw new Error("Respuesta no válida: " + respuesta.status);
+      }
+
+      // La respuesta llega como texto plano (no se interpreta como JSON)
+      const texto = await respuesta.text();
+      estado.textContent = "";
+      mostrarTexto(texto);
+    } catch (error) {
+      caja.textContent = "";
+      estado.className = "error";
+      estado.textContent = "No se pudieron obtener las noticias, intenta de nuevo.";
+    } finally {
+      boton.disabled = false;
+    }
+  }
+
+  boton.addEventListener("click", verNoticias);
+</script>
+
+</body>
+</html>

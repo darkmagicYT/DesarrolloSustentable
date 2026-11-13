@@ -1,2 +1,1 @@
-[Ver video en YouTube](https://youtu.be/0t2_hKdPLUc)
-
+[Calculadora de huella ecológica: funcionamiento](https://youtu.be/w7N3uDykccU)

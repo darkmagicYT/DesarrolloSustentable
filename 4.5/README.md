@@ -46,7 +46,7 @@ Página publicada: [[https://darkmagicyt.github.io/DesarrolloSustentable/4.5/Cod
 ## Video del funcionamiento
 
 [Carpeta](Video/README.md)
-[[enlace del video](PEGAR_AQUI_EL_ENLACE_DEL_VIDEO)]
+[Calculadora de huella ecológica: funcionamiento](https://youtu.be/w7N3uDykccU)
 
 ## Evidencia
 

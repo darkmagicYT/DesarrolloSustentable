@@ -32,7 +32,7 @@ Datos de la práctica: Desarrollo Sustentable (ACD-0908), Unidad 4 "Escenario ec
 ## Video del funcionamiento
 
 [Carpeta](Video/README.md)
-[[enlace del video](https://youtu.be/ENLACE_DEL_VIDEO)]
+[Bot Reparo o Compro: funcionamiento](https://youtu.be/5LyMr9c0maU)
 
 ## Evidencia
 

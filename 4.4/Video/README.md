@@ -1,2 +1,1 @@
-[Ver video en YouTube](https://youtu.be/0t2_hKdPLUc)
-
+[Bot Reparo o Compro: funcionamiento](https://youtu.be/5LyMr9c0maU)

@@ -61,7 +61,7 @@ Escenarios simulados: temporada normal, veda de camarón, Semana Santa (alta dem
 ## Video del funcionamiento
 
 [Carpeta](Video/README.md)
-[[enlace del video](https://youtu.be/)]
+[Simulador de oferta y demanda: explicación con Make y Arduino](https://youtu.be/o87KjXfc70o)
 
 ## Evidencia
 

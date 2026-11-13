@@ -42,7 +42,7 @@ Página publicada: [[https://darkmagicyt.github.io/DesarrolloSustentable/4.3/Cod
 ## Video del funcionamiento
 
 [Carpeta](Video/README.md)
-[[enlace del video](PEGA_AQUI_EL_ENLACE_DEL_VIDEO)]
+[Huella energética en la nube: funcionamiento de la encuesta con Make](https://youtu.be/ZcHuVsMOKeE)
 
 ## Evidencia
 

@@ -1,2 +1,1 @@
-[Ver video en YouTube](https://youtu.be/0t2_hKdPLUc)
-
+[Simulador de oferta y demanda: explicación con Make y Arduino](https://youtu.be/o87KjXfc70o)

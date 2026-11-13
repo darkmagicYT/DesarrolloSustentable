@@ -41,7 +41,7 @@ Página publicada: [https://darkmagicyt.github.io/DesarrolloSustentable/4.2/Codi
 ## Video del funcionamiento
 
 [Carpeta](Video/README.md)
-[enlace del video](PEGAR_AQUI_EL_ENLACE_DEL_VIDEO)
+[Encuesta: funcionamiento con Make y página web](https://youtu.be/KMVlPhui7L0)
 
 ## Evidencia
 

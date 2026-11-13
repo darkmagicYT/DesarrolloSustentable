@@ -1,12 +1,12 @@
 {
-    "name": "Noticias_Climaticas",
+    "name": "Huella energica Nube",
     "flow": [
         {
             "id": 1,
             "module": "gateway:CustomWebHook",
             "version": 1,
             "parameters": {
-                "hook": 3004816,
+                "hook": 3058999,
                 "maxResults": 1
             },
             "mapper": {},
@@ -21,7 +21,7 @@
                         "fields": []
                     },
                     "version": 1,
-                    "configuration": "2cabd78670e064a7"
+                    "configuration": "847881baa0d5ae6b"
                 },
                 "restore": {
                     "parameters": {
@@ -29,7 +29,7 @@
                             "data": {
                                 "editable": "true"
                             },
-                            "label": "Clima Pagina"
+                            "label": "Huella Nube"
                         }
                     }
                 },
@@ -48,175 +48,100 @@
                 ],
                 "interface": [
                     {
-                        "name": "tema",
+                        "name": "video",
+                        "type": "text"
+                    },
+                    {
+                        "name": "musica",
+                        "type": "text"
+                    },
+                    {
+                        "name": "redes",
+                        "type": "text"
+                    },
+                    {
+                        "name": "videollamadas",
+                        "type": "text"
+                    },
+                    {
+                        "name": "juegos",
+                        "type": "text"
+                    },
+                    {
+                        "name": "nube",
+                        "type": "text"
+                    },
+                    {
+                        "name": "ia",
+                        "type": "text"
+                    },
+                    {
+                        "name": "correos",
                         "type": "text"
                     }
                 ]
             }
         },
         {
-            "id": 2,
-            "module": "rss:ActionReadArticles",
-            "version": 4,
-            "parameters": {
-                "include": ""
-            },
-            "mapper": {
-                "url": "https://news.google.com/rss/search?q={{encodeURL(1.tema)}}&hl=es&gl=ES&ceid=ES:es",
-                "gzip": true,
-                "password": "",
-                "username": "",
-                "maxResults": 5,
-                "filterDateTo": "",
-                "filterDateFrom": ""
-            },
-            "metadata": {
-                "designer": {
-                    "x": 300,
-                    "y": 0
-                },
-                "restore": {},
-                "parameters": [
-                    {
-                        "name": "include",
-                        "type": "select",
-                        "label": "Process RSS fields",
-                        "advanced": true,
-                        "multiple": true,
-                        "validate": {
-                            "enum": [
-                                "google-merchant-center",
-                                "itunes"
-                            ]
-                        }
-                    }
-                ],
-                "expect": [
-                    {
-                        "name": "url",
-                        "type": "url",
-                        "label": "URL",
-                        "required": true
-                    },
-                    {
-                        "name": "username",
-                        "type": "text",
-                        "label": "User name",
-                        "advanced": true,
-                        "required": false
-                    },
-                    {
-                        "name": "password",
-                        "type": "password",
-                        "label": "Password",
-                        "advanced": true,
-                        "required": false
-                    },
-                    {
-                        "name": "filterDateFrom",
-                        "type": "date",
-                        "label": "Date from"
-                    },
-                    {
-                        "name": "filterDateTo",
-                        "type": "date",
-                        "label": "Date to "
-                    },
-                    {
-                        "name": "maxResults",
-                        "type": "number",
-                        "label": "Maximum number of returned items",
-                        "required": true
-                    },
-                    {
-                        "name": "gzip",
-                        "type": "boolean",
-                        "label": "Request compressed content",
-                        "default": true,
-                        "advanced": true,
-                        "required": true
-                    }
-                ]
-            }
-        },
-        {
             "id": 3,
-            "module": "util:TextAggregator",
-            "version": 1,
-            "parameters": {
-                "feeder": 2,
-                "rowSeparator": "\n"
-            },
-            "mapper": {
-                "value": "Título: {{2.title}}\nFecha: {{2.dateCreated}}\nEnlace: {{2.url}}"
-            },
-            "metadata": {
-                "designer": {
-                    "x": 600,
-                    "y": 0
-                }
-            }
-        },
-        {
-            "id": 4,
             "module": "ai-local-agent:RunLocalAIAgent",
             "version": 0,
             "parameters": {
                 "makeConnectionId": 10763751
             },
             "mapper": {
-                "files": [],
-                "message": "Tema :{{1.tema}}\n\nNoticias: {{3.text}}",
-                "threadId": "",
-                "outputType": "text",
-                "tokenLimit": "50",
-                "modelConfig": {
-                    "timeout": "",
-                    "recursionLimit": "300",
-                    "aiCompactionEnabled": true,
-                    "iterationsFromHistoryCount": "10"
-                },
                 "defaultModel": "medium",
-                "systemPrompt": "Eres un divulgador ambiental para alumnos de Desarrollo Sustentable del TecNM.\nRecibirás un tema y una lista de noticias recientes (título, fecha y enlace).\nUsa ÚNICAMENTE la información de esas noticias; no inventes datos ni agregues noticias que no estén en la lista.\n\nResponde en texto plano (sin asteriscos, sin markdown), en español, con este formato:\n\nRESUMEN DEL DÍA\n[3 a 4 líneas explicando de qué tratan las noticias en conjunto]\n\nNOTICIAS\n1. [título] - [1 línea explicando por qué importa]\n   [enlace]\n(repite para cada noticia)\n\n¿QUÉ PUEDO HACER YO?\n[1 acción concreta que un estudiante puede hacer relacionada con el tema]\n\nSi la lista de noticias viene vacía, responde: \"No se encontraron noticias recientes sobre este tema.\"",
+                "tokenLimit": "50",
                 "promptCaching": "none",
-                "fallbackEnabled": false
+                "fallbackEnabled": false,
+                "systemPrompt": "Eres un analista de sustentabilidad digital para alumnos de Desarrollo Sustentable del TecNM.\nRecibiras el uso digital de una persona. Estima la energia que ese uso provoca en centros de\ndatos y redes.\nReglas:\n- Usa este factor de emision: [\\[\n\\text{Emisiones}=\\text{kWh consumidos}\\times 0.444\n\\]] kg CO2e por kWh\n(fuente: [FUENTE]).\n- Para cada actividad indica el valor de kWh por hora (o por unidad) que supones. Si las fuentes\nvarian mucho, usa un valor intermedio y dilo.\n- No presentes las estimaciones como datos exactos.\nResponde en texto plano (sin asteriscos, sin markdown), en espanol, con este formato:\nENERGIA ESTIMADA\nPor semana: [kWh]\nPor año: [kWh]\nEmisiones por año: [kg CO2e]\nEquivale a: [kilometros en auto o dias con un foco LED encendido]\nSUPOSICIONES\n[una linea por actividad con el valor usado]\n¿QUIEN PAGA ESTE COSTO?\n[3 lineas: por que es una externalidad, que recursos consume (energia, agua) y quien la absorbe]\n3 ACCIONES PARA REDUCIRLA\n1. [...]\n2. [...]\n3. [...]",
+                "message": "Video: {{1.video}} h/dia, Musica: {{1.musica}}\nh/dia, Redes: {{1.redes}} h/dia, Videollamadas: {{1.videollamadas}} h/dia, Juegos: {{1.juegos}} h/dia, Nube: {{1.nube}} GB, IA: consulta/dia y Correos: {{1.correos}} al dia",
+                "files": [],
+                "threadId": "",
+                "modelConfig": {
+                    "recursionLimit": "300",
+                    "iterationsFromHistoryCount": "10",
+                    "timeout": "",
+                    "aiCompactionEnabled": true
+                },
+                "outputType": "text"
             },
             "metadata": {
                 "designer": {
-                    "x": 900,
+                    "x": 300,
                     "y": 0
                 },
                 "setupValidation": {
+                    "version": 1,
+                    "configuration": "36d512ba0216261a",
                     "result": {
                         "valid": true,
                         "fields": []
-                    },
-                    "version": 1,
-                    "configuration": "31159b7cd7c5ac7f"
+                    }
                 },
                 "restore": {
+                    "parameters": {
+                        "makeConnectionId": {
+                            "label": "Make's AI Provider (default)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "ai-provider"
+                            }
+                        }
+                    },
                     "expect": {
-                        "files": {
-                            "mode": "chose"
-                        },
-                        "outputType": {
-                            "label": "Text"
-                        },
                         "defaultModel": {
                             "mode": "chose",
                             "label": "MediumModel: gpt-5-nano. Reasoning: low. A balanced, quick choice for clearly defined tasks needing reliable answers rather than deep analysis"
                         },
                         "promptCaching": {
                             "label": "Automatic (always on)"
-                        }
-                    },
-                    "parameters": {
-                        "makeConnectionId": {
-                            "data": {
-                                "scoped": "true",
-                                "connection": "ai-provider"
-                            },
-                            "label": "Make's AI Provider (default)"
+                        },
+                        "files": {
+                            "mode": "chose"
+                        },
+                        "outputType": {
+                            "label": "Text"
                         }
                     }
                 },
@@ -240,8 +165,8 @@
                         "type": "number",
                         "label": "Maximum output length (%)",
                         "validate": {
-                            "max": 100,
-                            "min": 20
+                            "min": 20,
+                            "max": 100
                         }
                     },
                     {
@@ -273,6 +198,8 @@
                     },
                     {
                         "name": "files",
+                        "type": "array",
+                        "label": "Input files",
                         "spec": [
                             {
                                 "name": "fileName",
@@ -286,9 +213,7 @@
                                 "label": "Data",
                                 "semantic": "file:data"
                             }
-                        ],
-                        "type": "array",
-                        "label": "Input files"
+                        ]
                     },
                     {
                         "name": "threadId",
@@ -300,6 +225,8 @@
                     },
                     {
                         "name": "modelConfig",
+                        "type": "collection",
+                        "label": "Model configuration",
                         "spec": [
                             {
                                 "name": "recursionLimit",
@@ -316,8 +243,8 @@
                                 "type": "number",
                                 "label": "Step timeout",
                                 "validate": {
-                                    "max": 600,
-                                    "min": 120
+                                    "min": 120,
+                                    "max": 600
                                 }
                             },
                             {
@@ -326,9 +253,7 @@
                                 "label": "Enable compaction",
                                 "required": true
                             }
-                        ],
-                        "type": "collection",
-                        "label": "Model configuration"
+                        ]
                     },
                     {
                         "name": "outputType",
@@ -348,27 +273,18 @@
             "tools": []
         },
         {
-            "id": 5,
+            "id": 4,
             "module": "gateway:WebhookRespond",
             "version": 1,
             "parameters": {},
             "mapper": {
-                "body": "{{4.response}}",
+                "body": "{{3.response}}",
                 "status": "200",
-                "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "text/plain; charset=utf-8"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Origin",
-                        "value": "*"
-                    }
-                ]
+                "headers": []
             },
             "metadata": {
                 "designer": {
-                    "x": 1200,
+                    "x": 600,
                     "y": 0
                 },
                 "setupValidation": {
@@ -377,16 +293,12 @@
                         "fields": []
                     },
                     "version": 1,
-                    "configuration": "47244d31bad29d41"
+                    "configuration": "be2e680b0aa2684f"
                 },
                 "restore": {
                     "expect": {
                         "headers": {
-                            "mode": "chose",
-                            "items": [
-                                null,
-                                null
-                            ]
+                            "mode": "chose"
                         }
                     }
                 },

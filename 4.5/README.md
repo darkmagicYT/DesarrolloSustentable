@@ -57,10 +57,6 @@ Página publicada: [[https://darkmagicyt.github.io/DesarrolloSustentable/4.5/Cod
 
 ![Comparacion](Imagenes/Comparacion.png)
 
-### Foto 4 (Creditos)
-
-![Creditos](Imagenes/Creditos.png)
-
 ## Conclusiones
 
 La práctica permitió construir una calculadora de huella ecológica sin programar el procesamiento de la información. A su vez comparamos la estimación de la IA con la calculadora oficial de Global Footprint Network, conociendo de antemano que la IA da un valor aproximado y puede tener diferencias por falta de contexto o por los pocos datos que se le envían. Se reforzó el conocimiento sobre cómo conectar un webhook a una página web y sobre la importancia de enviar los datos como formulario y de agregar el encabezado Access-Control-Allow-Origin en la respuesta para que el navegador la acepte. También se identificó qué hábitos aumentan la huella, como el uso del aire acondicionado en el clima de Mazatlán, y se propusieron acciones y oportunidades económicas sustentables para reducirla.

@@ -23,18 +23,9 @@ Datos de la práctica: Desarrollo Sustentable (ACD-0908), Unidad 4 "Escenario ec
 - Al menos 6 aparatos con falla para probar el bot
 - GitHub
 
-## Resultados Act4.4
-
-![Resultados](Imagenes/Resultados.png)
-
-## Diagrama
-
-![Diagrama](Imagenes/Diagrama.png)
-
 ## Código
 
-- [Blueprint del escenario de Make](Codigo/Reparo_Compro.blueprint.json)
-- [Instrucciones del Make AI Agent](Codigo/Instrucciones_Agente.txt)
+- [Blueprint del escenario de Make](Codigo/BotComproReparo.blueprint.json)
 
 > El token del bot no se sube al repositorio. El blueprint se exporta sin la conexión de Telegram.
 
@@ -53,24 +44,14 @@ Datos de la práctica: Desarrollo Sustentable (ACD-0908), Unidad 4 "Escenario ec
 
 ![Bot](Imagenes/Bot.png)
 
-### Foto 3 (Prueba de los 6 aparatos con falla desde Telegram)
-
-![Pruebas](Imagenes/Pruebas.png)
-
-### Foto 4 (Verificación con un taller de Mazatlán)
-
-![Taller](Imagenes/Taller.png)
-
 | Aparato y falla | Recomendación de la IA | Costo según la IA | Cotización del taller | Tipo de obsolescencia | ¿Coincide? |
 | --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |
-|  |  |  |  |  |  |
+| Computadora portátil: no reconoce el cargador ni enciende el indicador de carga. | Reparar. Revisar batería, cargador y puerto de alimentación. | $1,500–$6,000 MXN | $1,600 | Por desgaste (percibida). | Si |
+| Samsung Galaxy A52: sobrecalentamiento y apagados inesperados. | Reparar. Revisar el sistema y sustituir la batería si es necesario. | $1,500–$5,000 MXN | $1000 | programada | No |
+| HP Pavilion 15: no mantiene la carga y se apaga al desconectarla. | Reparar. Revisar batería, cargador y conector de alimentación. | $1,500–$8,000 MXN | $3,000 | Desgaste. | Si |
+| Licuadora Oster clásica: el motor pierde potencia o deja de funcionar. | Reparar. Revisar motor, acoplamiento y conexiones eléctricas. | $800–$3,500 MXN | $400 | Ninguna (desgaste natural). | No |
 
-Taller o negocio consultado y fecha: _______________
-
-### Foto 5 (Creditos)
-
-![Creditos](Imagenes/Creditos.png)
+Taller o negocio consultado y fecha: Steren y Local de un amigo de la Familia 11/11/2026
 
 ## Conclusiones
 

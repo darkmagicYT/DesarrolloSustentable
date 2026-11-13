@@ -1,13 +1,12 @@
 {
-    "name": "Noticias_Climaticas",
+    "name": "BotComproReparo",
     "flow": [
         {
             "id": 1,
-            "module": "gateway:CustomWebHook",
+            "module": "telegram:WatchUpdates",
             "version": 1,
             "parameters": {
-                "hook": 3004816,
-                "maxResults": 1
+                "__IMTHOOK__": 3059865
             },
             "mapper": {},
             "metadata": {
@@ -21,152 +20,53 @@
                         "fields": []
                     },
                     "version": 1,
-                    "configuration": "2cabd78670e064a7"
+                    "configuration": "468643a0e6344b6f"
                 },
                 "restore": {
                     "parameters": {
-                        "hook": {
+                        "__IMTHOOK__": {
                             "data": {
-                                "editable": "true"
+                                "editable": "false"
                             },
-                            "label": "Clima Pagina"
+                            "label": "CompraReparaBot"
                         }
                     }
                 },
                 "parameters": [
                     {
-                        "name": "hook",
-                        "type": "hook:gateway-webhook",
+                        "name": "__IMTHOOK__",
+                        "type": "hook:telegramapi",
                         "label": "Webhook",
                         "required": true
-                    },
-                    {
-                        "name": "maxResults",
-                        "type": "number",
-                        "label": "Maximum number of results"
-                    }
-                ],
-                "interface": [
-                    {
-                        "name": "tema",
-                        "type": "text"
                     }
                 ]
             }
         },
         {
             "id": 2,
-            "module": "rss:ActionReadArticles",
-            "version": 4,
-            "parameters": {
-                "include": ""
-            },
-            "mapper": {
-                "url": "https://news.google.com/rss/search?q={{encodeURL(1.tema)}}&hl=es&gl=ES&ceid=ES:es",
-                "gzip": true,
-                "password": "",
-                "username": "",
-                "maxResults": 5,
-                "filterDateTo": "",
-                "filterDateFrom": ""
-            },
-            "metadata": {
-                "designer": {
-                    "x": 300,
-                    "y": 0
-                },
-                "restore": {},
-                "parameters": [
-                    {
-                        "name": "include",
-                        "type": "select",
-                        "label": "Process RSS fields",
-                        "advanced": true,
-                        "multiple": true,
-                        "validate": {
-                            "enum": [
-                                "google-merchant-center",
-                                "itunes"
-                            ]
-                        }
-                    }
-                ],
-                "expect": [
-                    {
-                        "name": "url",
-                        "type": "url",
-                        "label": "URL",
-                        "required": true
-                    },
-                    {
-                        "name": "username",
-                        "type": "text",
-                        "label": "User name",
-                        "advanced": true,
-                        "required": false
-                    },
-                    {
-                        "name": "password",
-                        "type": "password",
-                        "label": "Password",
-                        "advanced": true,
-                        "required": false
-                    },
-                    {
-                        "name": "filterDateFrom",
-                        "type": "date",
-                        "label": "Date from"
-                    },
-                    {
-                        "name": "filterDateTo",
-                        "type": "date",
-                        "label": "Date to "
-                    },
-                    {
-                        "name": "maxResults",
-                        "type": "number",
-                        "label": "Maximum number of returned items",
-                        "required": true
-                    },
-                    {
-                        "name": "gzip",
-                        "type": "boolean",
-                        "label": "Request compressed content",
-                        "default": true,
-                        "advanced": true,
-                        "required": true
-                    }
-                ]
-            }
-        },
-        {
-            "id": 3,
-            "module": "util:TextAggregator",
-            "version": 1,
-            "parameters": {
-                "feeder": 2,
-                "rowSeparator": "\n"
-            },
-            "mapper": {
-                "value": "Título: {{2.title}}\nFecha: {{2.dateCreated}}\nEnlace: {{2.url}}"
-            },
-            "metadata": {
-                "designer": {
-                    "x": 600,
-                    "y": 0
-                }
-            }
-        },
-        {
-            "id": 4,
             "module": "ai-local-agent:RunLocalAIAgent",
             "version": 0,
             "parameters": {
                 "makeConnectionId": 10763751
             },
+            "filter": {
+                "name": "Solo Texto",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{1.message.text}}",
+                            "o": "exist"
+                        },
+                        {
+                            "a": "{{1.message.photo}}",
+                            "o": "notexist"
+                        }
+                    ]
+                ]
+            },
             "mapper": {
                 "files": [],
-                "message": "Tema :{{1.tema}}\n\nNoticias: {{3.text}}",
+                "message": "{{1.message.text}}",
                 "threadId": "",
                 "outputType": "text",
                 "tokenLimit": "50",
@@ -177,22 +77,22 @@
                     "iterationsFromHistoryCount": "10"
                 },
                 "defaultModel": "medium",
-                "systemPrompt": "Eres un divulgador ambiental para alumnos de Desarrollo Sustentable del TecNM.\nRecibirás un tema y una lista de noticias recientes (título, fecha y enlace).\nUsa ÚNICAMENTE la información de esas noticias; no inventes datos ni agregues noticias que no estén en la lista.\n\nResponde en texto plano (sin asteriscos, sin markdown), en español, con este formato:\n\nRESUMEN DEL DÍA\n[3 a 4 líneas explicando de qué tratan las noticias en conjunto]\n\nNOTICIAS\n1. [título] - [1 línea explicando por qué importa]\n   [enlace]\n(repite para cada noticia)\n\n¿QUÉ PUEDO HACER YO?\n[1 acción concreta que un estudiante puede hacer relacionada con el tema]\n\nSi la lista de noticias viene vacía, responde: \"No se encontraron noticias recientes sobre este tema.\"",
+                "systemPrompt": "Eres un asesor de reparacion de aparatos para alumnos de Desarrollo Sustentable del TecNM en\nMazatlan, Sinaloa.\nEl usuario describe un aparato y su falla. Responde en texto plano (sin asteriscos, sin\nmarkdown), en espanol, con este formato:\nAparato: [que es]\nCausa probable: [1 linea]\nTipo de obsolescencia: [planificada / percibida / ninguna, con 1 linea de explicacion]\n¿Tiene reparacion?: [si / no / depende]\nCosto aproximado de reparacion: [rango en pesos mexicanos]\nCosto aproximado de uno nuevo: [rango en pesos mexicanos]\nImpacto si se desecha: [materiales que contiene y por que contamina]\nRECOMENDACION: [REPARAR / REEMPLAZAR / DONAR O RECICLAR, con 1 linea de razon]\nQue hacer: [donde repararlo o a donde llevarlo si se desecha]\nAclara que los costos son aproximados y que conviene pedir una cotizacion.\nSi el mensaje no describe un aparato con falla, responde: \"Describe el aparato y su falla, por\nejemplo: laptop de 4 años que se calienta y se apaga.\";",
                 "promptCaching": "none",
                 "fallbackEnabled": false
             },
             "metadata": {
                 "designer": {
-                    "x": 900,
+                    "x": 300,
                     "y": 0
                 },
                 "setupValidation": {
+                    "version": 1,
+                    "configuration": "52033c55eb1762d2",
                     "result": {
                         "valid": true,
                         "fields": []
-                    },
-                    "version": 1,
-                    "configuration": "31159b7cd7c5ac7f"
+                    }
                 },
                 "restore": {
                     "expect": {
@@ -348,27 +248,24 @@
             "tools": []
         },
         {
-            "id": 5,
-            "module": "gateway:WebhookRespond",
+            "id": 3,
+            "module": "telegram:SendReplyMessage",
             "version": 1,
-            "parameters": {},
+            "parameters": {
+                "__IMTCONN__": 12310568
+            },
             "mapper": {
-                "body": "{{4.response}}",
-                "status": "200",
-                "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "text/plain; charset=utf-8"
-                    },
-                    {
-                        "key": "Access-Control-Allow-Origin",
-                        "value": "*"
-                    }
-                ]
+                "text": "{{2.response}}",
+                "chatId": "{{1.message.chat.id}}",
+                "parseMode": "",
+                "replyMarkup": "",
+                "messageThreadId": "",
+                "replyToMessageId": "",
+                "replyMarkupAssembleType": "reply_markup_enter"
             },
             "metadata": {
                 "designer": {
-                    "x": 1200,
+                    "x": 600,
                     "y": 0
                 },
                 "setupValidation": {
@@ -377,61 +274,97 @@
                         "fields": []
                     },
                     "version": 1,
-                    "configuration": "47244d31bad29d41"
+                    "configuration": "dfa9a9e6c34bfe5a"
                 },
                 "restore": {
                     "expect": {
-                        "headers": {
-                            "mode": "chose",
-                            "items": [
-                                null,
-                                null
-                            ]
+                        "parseMode": {
+                            "label": "Empty"
+                        },
+                        "disableNotification": {
+                            "mode": "chose"
+                        },
+                        "replyMarkupAssembleType": {
+                            "label": "Enter the Reply Markup"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "telegram"
+                            },
+                            "label": "CompraReparaBot"
                         }
                     }
                 },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:telegram",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
                 "expect": [
                     {
-                        "name": "status",
-                        "type": "uinteger",
-                        "label": "Status",
-                        "required": true,
+                        "name": "chatId",
+                        "type": "text",
+                        "label": "Chat ID",
+                        "required": true
+                    },
+                    {
+                        "name": "text",
+                        "type": "text",
+                        "label": "Text",
+                        "required": true
+                    },
+                    {
+                        "name": "messageThreadId",
+                        "type": "number",
+                        "label": "Message Thread ID"
+                    },
+                    {
+                        "name": "parseMode",
+                        "type": "select",
+                        "label": "Parse Mode",
                         "validate": {
-                            "min": 100
+                            "enum": [
+                                "Markdown",
+                                "HTML"
+                            ]
                         }
                     },
                     {
-                        "name": "body",
-                        "type": "any",
-                        "label": "Body"
+                        "name": "disableNotification",
+                        "type": "boolean",
+                        "label": "Disable Notifications"
                     },
                     {
-                        "name": "headers",
-                        "spec": [
-                            {
-                                "name": "key",
-                                "type": "text",
-                                "label": "Key",
-                                "required": true,
-                                "validate": {
-                                    "max": 256
-                                }
-                            },
-                            {
-                                "name": "value",
-                                "type": "text",
-                                "label": "Value",
-                                "required": true,
-                                "validate": {
-                                    "max": 4096
-                                }
-                            }
-                        ],
-                        "type": "array",
-                        "label": "Custom headers",
+                        "name": "disableWebPagePreview",
+                        "type": "boolean",
+                        "label": "Disable Link Previews"
+                    },
+                    {
+                        "name": "replyToMessageId",
+                        "type": "number",
+                        "label": "Original Message ID"
+                    },
+                    {
+                        "name": "replyMarkupAssembleType",
+                        "type": "select",
+                        "label": "Enter/Assemble the Reply Markup Field",
                         "validate": {
-                            "maxItems": 16
+                            "enum": [
+                                "reply_markup_enter",
+                                "reply_markup_assemble"
+                            ]
                         }
+                    },
+                    {
+                        "name": "replyMarkup",
+                        "type": "text",
+                        "label": "Reply Markup"
                     }
                 ]
             }

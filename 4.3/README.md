@@ -20,9 +20,13 @@ Datos capturados: video, música, redes, videollamadas, juegos, nube, IA y corre
 - IA generativa (versión gratuita) para generar la página
 - GitHub y GitHub Pages
 
-## Resultados Act4.3-P5
+## Experimentos
 
-![Resultados](Imagenes/Resultados.png)
+|Encuestados|kWh por año|kg COe por año|Actividad que más consume|
+|---|---|---|---|
+|Cesar|957 kWh|1,269|Inteligencia artificial|
+|America|1,853.68|822.49|Inteligencia artificial|
+|Carlos|1,259.11|558.68|Inteligencia artificial|
 
 ## Diagrama
 
@@ -31,7 +35,7 @@ Datos capturados: video, música, redes, videollamadas, juegos, nube, IA y corre
 ## Código
 
 - [index.html (página web)](Codigo/index.html)
-- [Blueprint del escenario de Make](Codigo/Huella_Nube.blueprint.json)
+- [Blueprint del escenario de Make](Codigo/HuellaEnergicaNube.blueprint.json)
 
 Página publicada: [[https://darkmagicyt.github.io/DesarrolloSustentable/4.3/Codigo/index.html](https://darkmagicyt.github.io/DesarrolloSustentable/4.3/Codigo/index.html)]
 
@@ -52,11 +56,7 @@ Página publicada: [[https://darkmagicyt.github.io/DesarrolloSustentable/4.3/Cod
 
 ### Foto 3 (Prueba con los datos de uso digital desde la página publicada)
 
-![Pruebas](Imagenes/Pruebas.png)
-
-### Foto 4 (Creditos)
-
-![Creditos](Imagenes/Creditos.png)
+![Pruebas](Imagenes/Pagina.png)
 
 ## Conclusiones
 

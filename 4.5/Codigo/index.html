@@ -60,6 +60,7 @@
     margin: 0 0 1.5rem;
     padding: 0 0 0 1rem;
   }
+  fieldset { min-width: 0; }
   legend {
     float: left;
     width: 100%;
@@ -69,7 +70,7 @@
     font-weight: bold;
     color: var(--bosque);
   }
-  fieldset > label { clear: both; }
+  legend + * { clear: both; }
   label {
     display: block;
     margin-bottom: .9rem;

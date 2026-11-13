@@ -23,9 +23,14 @@ Preguntas del cuestionario: carne, comida local, medio de transporte, kilómetro
 - GitHub y GitHub Pages
 - Calculadora oficial de Global Footprint Network ([footprintcalculator.org](https://www.footprintcalculator.org))
 
-## Resultados Act5
+## Resultados
 
-![Resultados](Imagenes/Resultados.png)
+| Encuestado | Planetas según su página | Planetas según la calculadora oficial | Diferencia | Área de mayor impacto |
+| --- | --- | --- | --- | --- |
+| 1 | 4.5 | 4.9 | 0.4 | Comida |
+| 2 | 1.2 | 4.1 | 3.9 | Movilidad |
+| 3 | 2 | 5.7 | 3.7 | Abrigo |
+| 4 | 1.8 | 14.3 | 12.5 | Abrigo |
 
 ## Diagrama
 
@@ -34,7 +39,7 @@ Preguntas del cuestionario: carne, comida local, medio de transporte, kilómetro
 ## Código
 
 - [index.html (página web)](Codigo/index.html)
-- [Blueprint del escenario de Make](Codigo/Huella_Ecologica.blueprint.json)
+- [Blueprint del escenario de Make](Codigo/Calculadoradehuellaecológica.blueprint.json)
 
 Página publicada: [[https://darkmagicyt.github.io/DesarrolloSustentable/4.5/Codigo/index.html](https://darkmagicyt.github.io/DesarrolloSustentable/4.5/Codigo/index.html)]
 
@@ -53,9 +58,9 @@ Página publicada: [[https://darkmagicyt.github.io/DesarrolloSustentable/4.5/Cod
 
 ![Pagina](Imagenes/Pagina.png)
 
-### Foto 3 (Resultado de la página y de la calculadora oficial)
+### Foto 3 (Calculadora Oficial)
 
-![Comparacion](Imagenes/Comparacion.png)
+![Comparacion](Imagenes/Oficial.png)
 
 ## Conclusiones
 
